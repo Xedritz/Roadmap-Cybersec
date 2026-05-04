@@ -1,0 +1,2612 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roadmap Ciberseguridad 0→Experto</title>
+<style>
+:root{
+  --bg:#0b0b12;--bg2:#111119;--bg3:#181824;--bg4:#1e1e2e;
+  --border:#252538;--border2:#30304a;
+  --text:#c8d0e0;--muted:#6b7192;--hint:#3a3d55;
+  --cyan:#00d4ff;--green:#00e87a;--orange:#ff6e40;
+  --amber:#ffb300;--purple:#9d74ff;--pink:#ff5fa0;--red:#ff4757;
+  --cyan-dim:#00d4ff22;--green-dim:#00e87a18;--orange-dim:#ff6e4018;
+  --amber-dim:#ffb30018;--purple-dim:#9d74ff18;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.6;min-height:100vh}
+a{color:var(--cyan);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ── HEADER ── */
+.header{background:var(--bg2);border-bottom:1px solid var(--border);padding:24px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.header-title{display:flex;align-items:center;gap:16px}
+.logo{width:44px;height:44px;background:linear-gradient(135deg,var(--cyan),var(--purple));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+h1{font-size:22px;font-weight:700;letter-spacing:-0.5px}
+.header-sub{color:var(--muted);font-size:13px;margin-top:2px}
+.stats{display:flex;gap:20px;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-val{font-size:20px;font-weight:700;color:var(--cyan)}
+.stat-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+
+/* ── NAV TABS ── */
+.nav{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 32px;display:flex;overflow-x:auto;gap:0;position:sticky;top:0;z-index:100}
+.nav::-webkit-scrollbar{height:3px}
+.nav::-webkit-scrollbar-thumb{background:var(--border2)}
+.tab-btn{padding:14px 18px;border:none;background:transparent;color:var(--muted);cursor:pointer;font-size:13px;font-weight:500;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;font-family:inherit}
+.tab-btn:hover{color:var(--text)}
+.tab-btn.active{color:var(--cyan);border-bottom-color:var(--cyan)}
+
+/* ── CONTENT ── */
+.content{padding:32px;max-width:1200px;margin:0 auto}
+.tab-pane{display:none}
+.tab-pane.active{display:block}
+
+/* ── PHASE HEADER ── */
+.phase-header{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;margin-bottom:28px}
+.phase-badge{display:inline-flex;align-items:center;gap:8px;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}
+.phase-title{font-size:26px;font-weight:700;margin-bottom:6px}
+.phase-desc{color:var(--muted);font-size:14px;max-width:640px;line-height:1.7}
+.phase-meta{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:20px;min-width:200px;display:flex;flex-direction:column;gap:12px}
+.meta-row{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.meta-lbl{font-size:12px;color:var(--muted)}
+.meta-val{font-size:14px;font-weight:600}
+
+/* ── SECTION HEADINGS ── */
+.section-title{font-size:16px;font-weight:600;margin:28px 0 14px;display:flex;align-items:center;gap:8px}
+.section-title::before{content:'';display:block;width:3px;height:18px;border-radius:2px;background:var(--cyan)}
+
+/* ── SKILL CHIPS ── */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.chip{padding:4px 12px;border-radius:20px;font-size:12px;font-weight:500;background:var(--bg4);border:1px solid var(--border2);color:var(--text)}
+.chip.cyan{background:var(--cyan-dim);border-color:var(--cyan);color:var(--cyan)}
+.chip.green{background:var(--green-dim);border-color:var(--green);color:var(--green)}
+.chip.orange{background:var(--orange-dim);border-color:var(--orange);color:var(--orange)}
+.chip.amber{background:var(--amber-dim);border-color:var(--amber);color:var(--amber)}
+.chip.purple{background:var(--purple-dim);border-color:var(--purple);color:var(--purple)}
+
+/* ── WEEK TABLES ── */
+.week-block{margin-bottom:24px}
+.week-label{font-size:13px;font-weight:600;color:var(--amber);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.week-label::after{content:'';flex:1;height:1px;background:var(--border)}
+table{width:100%;border-collapse:collapse;border-radius:10px;overflow:hidden;font-size:13px}
+thead tr{background:var(--bg4)}
+th{padding:10px 14px;text-align:left;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)}
+td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--bg3)}
+.day-lbl{font-weight:600;color:var(--cyan);white-space:nowrap}
+.topic{font-weight:600;color:var(--text)}
+.subtopic{color:var(--muted);font-size:12px;margin-top:2px}
+.practice{color:var(--green);font-size:12px;margin-top:3px}
+.practice::before{content:'▶ '}
+.tool-tag{display:inline-block;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;background:var(--bg4);border:1px solid var(--border2);color:var(--purple)}
+.result{color:var(--amber);font-size:12px;font-style:italic;margin-top:3px}
+.result::before{content:'→ '}
+
+/* ── TOOL CARDS ── */
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.tool-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:20px;transition:border-color .2s}
+.tool-card:hover{border-color:var(--border2)}
+.tool-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.tool-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.tool-name{font-size:15px;font-weight:600}
+.tool-phase{font-size:11px;color:var(--muted)}
+.tool-desc{color:var(--muted);font-size:13px;line-height:1.6;margin-bottom:10px}
+.tool-cmd{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px 12px;font-family:'Courier New',monospace;font-size:12px;color:var(--green);word-break:break-all}
+
+/* ── CERT TIMELINE ── */
+.cert-timeline{position:relative;padding-left:32px}
+.cert-timeline::before{content:'';position:absolute;left:12px;top:0;bottom:0;width:2px;background:var(--border2)}
+.cert-item{position:relative;margin-bottom:24px}
+.cert-dot{position:absolute;left:-26px;top:4px;width:12px;height:12px;border-radius:50%;border:2px solid var(--bg3)}
+.cert-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px 20px}
+.cert-name{font-size:15px;font-weight:600;margin-bottom:4px}
+.cert-meta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:8px}
+.cert-badge{font-size:11px;padding:2px 8px;border-radius:4px;font-weight:600}
+.cert-why{color:var(--muted);font-size:13px;line-height:1.6}
+
+/* ── PROJECT CARDS ── */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.proj-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:20px}
+.proj-phase{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.proj-title{font-size:16px;font-weight:600;margin-bottom:6px}
+.proj-desc{color:var(--muted);font-size:13px;line-height:1.6;margin-bottom:12px}
+.proj-tech{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.proj-output{background:var(--bg);border-left:3px solid var(--green);padding:8px 12px;border-radius:0 6px 6px 0;font-size:12px;color:var(--green)}
+
+/* ── CHECKLIST / TIPS ── */
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.tip-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:20px}
+.tip-title{font-size:15px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.tip-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.tip-list li{font-size:13px;color:var(--muted);padding-left:16px;position:relative;line-height:1.5}
+.tip-list li::before{content:'→';position:absolute;left:0;color:var(--cyan);font-size:11px;top:2px}
+.tip-list li strong{color:var(--text)}
+
+/* ── OVERVIEW TIMELINE ── */
+.overview-grid{display:grid;gap:16px}
+.ov-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:20px;display:grid;grid-template-columns:120px 1fr auto;gap:20px;align-items:center;cursor:pointer;transition:border-color .2s}
+.ov-card:hover{border-color:var(--border2)}
+.ov-num{font-size:36px;font-weight:800;opacity:.4}
+.ov-title{font-size:16px;font-weight:600;margin-bottom:4px}
+.ov-desc{color:var(--muted);font-size:13px}
+.ov-right{text-align:right}
+.ov-weeks{font-size:22px;font-weight:700}
+.ov-hrs{font-size:12px;color:var(--muted)}
+.progress-bar{height:4px;background:var(--border);border-radius:2px;margin-top:12px;overflow:hidden}
+.progress-fill{height:100%;border-radius:2px;transition:width 1s}
+
+/* ── ALERT/NOTE ── */
+.note{background:var(--cyan-dim);border:1px solid var(--cyan);border-radius:8px;padding:12px 16px;font-size:13px;color:var(--text);margin:16px 0;display:flex;gap:10px}
+.warn{background:var(--orange-dim);border-color:var(--orange)}
+
+/* SCROLL */
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
+
+/* ── RESOURCE CARDS ── */
+.res-section{margin-bottom:36px}
+.res-section-title{font-size:15px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:10px;color:var(--text)}
+.res-section-title span{font-size:12px;font-weight:500;padding:2px 8px;border-radius:12px;background:var(--bg4);color:var(--muted)}
+.res-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.res-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px 16px;transition:border-color .2s}
+.res-card:hover{border-color:var(--border2)}
+.res-card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:6px}
+.res-card-title{font-size:14px;font-weight:600;line-height:1.3}
+.res-badges{display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end}
+.badge-free{padding:2px 7px;border-radius:4px;font-size:10px;font-weight:700;background:var(--green-dim);color:var(--green);border:1px solid var(--green);white-space:nowrap}
+.badge-paid{padding:2px 7px;border-radius:4px;font-size:10px;font-weight:700;background:var(--amber-dim);color:var(--amber);border:1px solid var(--amber);white-space:nowrap}
+.badge-en{padding:2px 7px;border-radius:4px;font-size:10px;font-weight:600;background:var(--bg4);color:var(--muted);white-space:nowrap}
+.badge-es{padding:2px 7px;border-radius:4px;font-size:10px;font-weight:600;background:var(--purple-dim);color:var(--purple);border:1px solid var(--purple);white-space:nowrap}
+.res-card-desc{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:10px}
+.res-link{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--cyan);padding:5px 10px;border-radius:6px;background:var(--cyan-dim);border:1px solid var(--cyan)22;transition:all .15s}
+.res-link:hover{background:var(--cyan)18;text-decoration:none}
+.res-type-label{display:inline-flex;align-items:center;gap:5px;font-size:11px;padding:2px 8px;border-radius:4px;margin-right:6px}
+/* Phase color bands */
+.phase-band{display:inline-block;width:3px;height:100%;border-radius:2px;margin-right:8px}
+.res-cat-header{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin:20px 0 10px;display:flex;align-items:center;gap:8px}
+.res-cat-header::after{content:'';flex:1;height:1px;background:var(--border)}
+/* YouTube channel grid */
+.yt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.yt-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px;display:flex;align-items:center;gap:12px;transition:border-color .2s}
+.yt-card:hover{border-color:var(--border2)}
+.yt-icon{width:38px;height:38px;border-radius:8px;background:#ff000022;border:1px solid #ff000033;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.yt-name{font-size:13px;font-weight:600;margin-bottom:2px}
+.yt-desc{font-size:11px;color:var(--muted);line-height:1.4}
+/* Book list */
+.book-list{display:flex;flex-direction:column;gap:8px}
+.book-item{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px 14px;display:flex;align-items:center;gap:12px}
+.book-icon{font-size:18px;flex-shrink:0}
+.book-title{font-size:13px;font-weight:600;margin-bottom:2px}
+.book-meta{font-size:11px;color:var(--muted)}
+/* Community grid */
+.community-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.com-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
+.com-icon{font-size:24px;margin-bottom:6px}
+.com-name{font-size:13px;font-weight:600;margin-bottom:4px}
+.com-desc{font-size:11px;color:var(--muted);line-height:1.4;margin-bottom:8px}
+/* Quick filter */
+.filter-bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.filter-btn{padding:6px 14px;border:1px solid var(--border2);border-radius:20px;background:transparent;color:var(--muted);cursor:pointer;font-size:12px;font-weight:600;transition:all .15s;font-family:inherit}
+.filter-btn:hover,.filter-btn.on{background:var(--cyan-dim);border-color:var(--cyan);color:var(--cyan)}
+
+@media(max-width:700px){
+  .phase-header{grid-template-columns:1fr}
+  .ov-card{grid-template-columns:1fr}
+  .ov-num{font-size:24px}
+  .content{padding:16px}
+  .header{padding:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-title">
+    <div class="logo">🛡</div>
+    <div>
+      <h1>Roadmap: Ciberseguridad 0 → Experto</h1>
+      <div class="header-sub">Cloud Security · Ethical Hacking · Security Engineering — 2 hrs/día · Lun–Vie</div>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-val">48</div><div class="stat-lbl">Semanas</div></div>
+    <div class="stat"><div class="stat-val">480h</div><div class="stat-lbl">Horas totales</div></div>
+    <div class="stat"><div class="stat-val">6</div><div class="stat-lbl">Fases</div></div>
+    <div class="stat"><div class="stat-val">8</div><div class="stat-lbl">Certificaciones</div></div>
+    <div class="stat"><div class="stat-val">12</div><div class="stat-lbl">Proyectos</div></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <button class="tab-btn active" onclick="showTab('overview')">📋 Visión General</button>
+  <button class="tab-btn" onclick="showTab('fase0')">⬡ Fase 0</button>
+  <button class="tab-btn" onclick="showTab('fase1')">⬡ Fase 1</button>
+  <button class="tab-btn" onclick="showTab('fase2')">⬡ Fase 2</button>
+  <button class="tab-btn" onclick="showTab('fase3')">⬡ Fase 3</button>
+  <button class="tab-btn" onclick="showTab('fase4')">⬡ Fase 4</button>
+  <button class="tab-btn" onclick="showTab('fase5')">⬡ Fase 5</button>
+  <button class="tab-btn" onclick="showTab('tools')">🔧 Herramientas</button>
+  <button class="tab-btn" onclick="showTab('certs')">🏅 Certificaciones</button>
+  <button class="tab-btn" onclick="showTab('projects')">🚀 Proyectos</button>
+  <button class="tab-btn" onclick="showTab('tips')">💡 Consejos Pro</button>
+  <button class="tab-btn" onclick="showTab('recursos')">📚 Recursos & Links</button>
+</div>
+
+<div class="content">
+
+<!-- ═══════════════════════════════════════════════════════ OVERVIEW -->
+<div id="tab-overview" class="tab-pane active">
+  <div class="section-title">Mapa completo del roadmap</div>
+  <div class="note">💡 Haz clic en cualquier fase para ir al detalle completo. Con 2h/día (10h/semana) tienes ~480 horas en 12 meses. Eso equivale a un bootcamp intensivo + experiencia autodidacta real.</div>
+
+  <div class="overview-grid">
+    <div class="ov-card" onclick="showTab('fase0')">
+      <div><div class="ov-num" style="color:var(--muted)">0</div></div>
+      <div>
+        <div class="ov-title">Fundamentos — Lógica, Linux & Python Básico</div>
+        <div class="ov-desc">Pensamiento computacional, binario/hex, Linux CLI, modelo OSI, Python desde cero.</div>
+        <div class="chips" style="margin-top:10px">
+          <span class="chip">Linux CLI</span><span class="chip">Binario/Hex</span><span class="chip">OSI/TCP-IP</span><span class="chip">Python básico</span><span class="chip">VirtualBox</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:8%;background:var(--muted)"></div></div>
+      </div>
+      <div class="ov-right"><div class="ov-weeks" style="color:var(--muted)">4</div><div class="ov-hrs">semanas · 40h</div></div>
+    </div>
+
+    <div class="ov-card" onclick="showTab('fase1')">
+      <div><div class="ov-num" style="color:var(--green)">1</div></div>
+      <div>
+        <div class="ov-title">Base Técnica — Linux Avanzado, Redes & Python Intermedio</div>
+        <div class="ov-desc">Shell scripting, permisos avanzados, subnetting real, Wireshark, Python para ciberseguridad.</div>
+        <div class="chips" style="margin-top:10px">
+          <span class="chip green">Wireshark</span><span class="chip green">Bash scripting</span><span class="chip green">Subnetting</span><span class="chip green">Python scripts</span><span class="chip green">TryHackMe Pre-Security</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:21%;background:var(--green)"></div></div>
+      </div>
+      <div class="ov-right"><div class="ov-weeks" style="color:var(--green)">10</div><div class="ov-hrs">semanas · 100h</div></div>
+    </div>
+
+    <div class="ov-card" onclick="showTab('fase2')">
+      <div><div class="ov-num" style="color:var(--cyan)">2</div></div>
+      <div>
+        <div class="ov-title">Ciberseguridad + Blue Team</div>
+        <div class="ov-desc">CIA triad, OWASP Top 10, SIEM, análisis de logs, detección de intrusiones, hardening.</div>
+        <div class="chips" style="margin-top:10px">
+          <span class="chip cyan">Splunk/Wazuh</span><span class="chip cyan">OWASP</span><span class="chip cyan">Hardening</span><span class="chip cyan">TryHackMe SOC Lv1</span><span class="chip cyan">Security+</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:38%;background:var(--cyan)"></div></div>
+      </div>
+      <div class="ov-right"><div class="ov-weeks" style="color:var(--cyan)">8</div><div class="ov-hrs">semanas · 80h</div></div>
+    </div>
+
+    <div class="ov-card" onclick="showTab('fase3')">
+      <div><div class="ov-num" style="color:var(--orange)">3</div></div>
+      <div>
+        <div class="ov-title">Red Team — Ethical Hacking & Pentesting</div>
+        <div class="ov-desc">Metodología pentest, Nmap, Metasploit, Burp Suite, explotación de vulnerabilidades, CTFs.</div>
+        <div class="chips" style="margin-top:10px">
+          <span class="chip orange">Nmap</span><span class="chip orange">Metasploit</span><span class="chip orange">Burp Suite</span><span class="chip orange">Hack The Box</span><span class="chip orange">eJPT/CEH</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:58%;background:var(--orange)"></div></div>
+      </div>
+      <div class="ov-right"><div class="ov-weeks" style="color:var(--orange)">10</div><div class="ov-hrs">semanas · 100h</div></div>
+    </div>
+
+    <div class="ov-card" onclick="showTab('fase4')">
+      <div><div class="ov-num" style="color:var(--amber)">4</div></div>
+      <div>
+        <div class="ov-title">Cloud Security — Azure</div>
+        <div class="ov-desc">Azure architecture, IAM, Microsoft Defender, Sentinel, AZ-500, SC-200, DevSecOps.</div>
+        <div class="chips" style="margin-top:10px">
+          <span class="chip amber">Azure Portal</span><span class="chip amber">MS Defender</span><span class="chip amber">Sentinel</span><span class="chip amber">AZ-500</span><span class="chip amber">SC-200</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:75%;background:var(--amber)"></div></div>
+      </div>
+      <div class="ov-right"><div class="ov-weeks" style="color:var(--amber)">8</div><div class="ov-hrs">semanas · 80h</div></div>
+    </div>
+
+    <div class="ov-card" onclick="showTab('fase5')">
+      <div><div class="ov-num" style="color:var(--purple)">5</div></div>
+      <div>
+        <div class="ov-title">Especialización & Empleabilidad</div>
+        <div class="ov-desc">DevSecOps, API Security, IA aplicada a ciberseguridad, portafolio, entrevistas, primer trabajo.</div>
+        <div class="chips" style="margin-top:10px">
+          <span class="chip purple">GitHub Actions</span><span class="chip purple">OWASP API Top 10</span><span class="chip purple">LinkedIn/CV</span><span class="chip purple">OSCP prep</span><span class="chip purple">Bug Bounty</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:100%;background:var(--purple)"></div></div>
+      </div>
+      <div class="ov-right"><div class="ov-weeks" style="color:var(--purple)">8</div><div class="ov-hrs">semanas · 80h</div></div>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:36px">Malla de conocimientos — orden correcto</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px">
+    <div class="tool-card">
+      <div class="tool-name" style="color:var(--muted);margin-bottom:10px">🔢 Fundamentos</div>
+      <ul class="tip-list">
+        <li>Binario, hexadecimal, bases numéricas</li>
+        <li>Lógica booleana (AND/OR/XOR/NOT)</li>
+        <li>Cómo funciona una CPU + memoria</li>
+        <li>Algoritmos básicos y pseudocódigo</li>
+        <li>Pensamiento sistémico (inputs → proceso → output)</li>
+      </ul>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name" style="color:var(--green);margin-bottom:10px">🐧 Linux + OS</div>
+      <ul class="tip-list">
+        <li>Estructura de directorios y permisos</li>
+        <li>Procesos, señales, systemd</li>
+        <li>Bash scripting avanzado</li>
+        <li>Windows internals (registro, AD básico)</li>
+        <li>Virtualización (VirtualBox, VMware)</li>
+      </ul>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name" style="color:var(--cyan);margin-bottom:10px">🌐 Redes</div>
+      <ul class="tip-list">
+        <li>Modelo OSI: las 7 capas en profundidad</li>
+        <li>TCP/IP, UDP, ICMP: flags y comportamiento</li>
+        <li>Subnetting: CIDR, máscaras, rangos</li>
+        <li>DNS, DHCP, ARP, NAT, routing</li>
+        <li>Protocolos: HTTP/S, SSH, FTP, SMB, LDAP</li>
+      </ul>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name" style="color:var(--amber);margin-bottom:10px">🐍 Python</div>
+      <ul class="tip-list">
+        <li>Variables, tipos, control de flujo</li>
+        <li>Funciones, módulos, POO básica</li>
+        <li>socket, requests, subprocess, os</li>
+        <li>Scripts de escaneo, análisis de logs</li>
+        <li>Automatización ofensiva y defensiva</li>
+      </ul>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name" style="color:var(--orange);margin-bottom:10px">🔒 Ciberseguridad Core</div>
+      <ul class="tip-list">
+        <li>CIA Triad, STRIDE, MITRE ATT&CK</li>
+        <li>OWASP Top 10 (Web + API)</li>
+        <li>Criptografía: simétrica, asimétrica, hashing</li>
+        <li>PKI, certificados TLS, CA</li>
+        <li>Tipos de malware y APTs</li>
+      </ul>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name" style="color:var(--purple);margin-bottom:10px">☁️ Cloud Azure</div>
+      <ul class="tip-list">
+        <li>Arquitectura Azure (regiones, servicios core)</li>
+        <li>IAM: Azure AD, RBAC, PIM, MFA</li>
+        <li>NSG, Azure Firewall, DDoS Protection</li>
+        <li>Microsoft Defender for Cloud</li>
+        <li>Azure Sentinel (SIEM cloud-native)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ FASE 0 -->
+<div id="tab-fase0" class="tab-pane">
+  <div class="phase-header">
+    <div>
+      <div class="phase-badge" style="background:var(--bg4);color:var(--muted);border:1px solid var(--border2)">Fase 0 · Semanas 1–4</div>
+      <div class="phase-title">Fundamentos: Lógica, Linux & Python básico</div>
+      <div class="phase-desc">Construyes los cimientos que hacen que todo lo demás tenga sentido. Sin esta base sólida, el pentesting y cloud son magia negra sin comprensión real.</div>
+    </div>
+    <div class="phase-meta">
+      <div class="meta-row"><span class="meta-lbl">Duración</span><span class="meta-val">4 semanas</span></div>
+      <div class="meta-row"><span class="meta-lbl">Horas</span><span class="meta-val">40 horas</span></div>
+      <div class="meta-row"><span class="meta-lbl">Plataforma</span><span class="meta-val">TryHackMe</span></div>
+      <div class="meta-row"><span class="meta-lbl">Resultado</span><span class="meta-val">VM funcional + scripts básicos</span></div>
+    </div>
+  </div>
+
+  <div class="section-title">Skills que dominarás al terminar</div>
+  <div class="chips">
+    <span class="chip">Convertir binario ↔ decimal ↔ hex de memoria</span>
+    <span class="chip">Navegar Linux CLI sin GUI</span>
+    <span class="chip">Entender el modelo OSI por capa</span>
+    <span class="chip">Escribir scripts Python básicos</span>
+    <span class="chip">Configurar y usar VMs con VirtualBox</span>
+    <span class="chip">Completar TryHackMe Pre-Security Path</span>
+  </div>
+
+  <div class="section-title">Semana 1 — Lógica, Binario & Primer contacto con Linux</div>
+  <div class="week-block">
+    <table>
+      <thead><tr><th>Día</th><th>Tema / Subtema</th><th>Qué estudiar (teoría)</th><th>Qué practicar</th><th>Herramienta</th><th>Resultado del día</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="day-lbl">LUN</span></td>
+          <td><div class="topic">Binario y bases numéricas</div><div class="subtopic">Decimal, binario, hexadecimal, octal</div></td>
+          <td>Cómo funciona el sistema binario. Por qué las computadoras usan base 2. Conversión entre bases. Tabla ASCII.</td>
+          <td><span class="practice">Convertir a mano: 255 → binario, 0xFF → decimal, 01010101 → hex. Escribir tabla de conversión de 0–15.</span></td>
+          <td><span class="tool-tag">Papel + Python</span></td>
+          <td><span class="result">Conviertes cualquier número entre bases en menos de 30 segundos</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">MAR</span></td>
+          <td><div class="topic">Lógica booleana</div><div class="subtopic">AND, OR, NOT, XOR, NAND, NOR</div></td>
+          <td>Álgebra de Boole básica. Tablas de verdad. Aplicaciones en criptografía (XOR encryption). Circuitos lógicos básicos.</td>
+          <td><span class="practice">Completar tablas de verdad para AND/OR/XOR con 3 variables. Implementar operadores booleanos en Python. Escribir función XOR en Python.</span></td>
+          <td><span class="tool-tag">Python 3</span></td>
+          <td><span class="result">Implementas cifrado XOR simple de 5 líneas en Python</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">MIÉ</span></td>
+          <td><div class="topic">Instalar entorno de laboratorio</div><div class="subtopic">VirtualBox + Ubuntu 22.04 LTS</div></td>
+          <td>Qué es una VM. Por qué usar VMs en ciberseguridad. Tipos de red (NAT, Bridge, Host-only). Snapshots.</td>
+          <td><span class="practice">Descargar VirtualBox 7.x + Ubuntu 22.04 ISO. Crear VM: 4GB RAM, 50GB disco, red NAT. Instalar Ubuntu. Crear snapshot "limpio".</span></td>
+          <td><span class="tool-tag">VirtualBox</span></td>
+          <td><span class="result">VM Ubuntu funcional con snapshot guardado</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">JUE</span></td>
+          <td><div class="topic">Linux CLI — Navegación básica</div><div class="subtopic">Filesystem, comandos esenciales</div></td>
+          <td>Estructura de directorios Linux (/etc, /var, /home, /bin, /proc, /tmp). stdin/stdout/stderr. Pipes y redirección.</td>
+          <td><span class="practice">Ejecutar: ls -la, cd, pwd, mkdir, rm -rf, cp, mv, cat, less, head, tail, grep, find /etc -name "*.conf". Crear árbol de directorios para un proyecto.</span></td>
+          <td><span class="tool-tag">Linux CLI</span></td>
+          <td><span class="result">Navegas el sistema de archivos sin ayuda visual</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">VIE</span></td>
+          <td><div class="topic">Linux CLI — Texto y pipes</div><div class="subtopic">grep, awk, sed, sort, uniq, wc</div></td>
+          <td>Procesamiento de texto en Linux. Expresiones regulares básicas. Pipeline: cómo encadenar comandos para procesar datos.</td>
+          <td><span class="practice">Crear archivo con 50 IPs ficticias. Usar grep para filtrar. Ordenar con sort -u. Contar líneas con wc -l. Extraer campo con awk '{print $1}'. Pipeline completo.</span></td>
+          <td><span class="tool-tag">Linux CLI</span></td>
+          <td><span class="result">Procesas cualquier archivo de texto con pipeline de 3+ comandos</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">Semana 2 — Linux Profundo & Redes: Modelo OSI</div>
+  <div class="week-block">
+    <table>
+      <thead><tr><th>Día</th><th>Tema / Subtema</th><th>Qué estudiar</th><th>Qué practicar</th><th>Herramienta</th><th>Resultado</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="day-lbl">LUN</span></td>
+          <td><div class="topic">Permisos Linux</div><div class="subtopic">chmod, chown, SUID, SGID, sticky bit</div></td>
+          <td>Sistema rwxrwxrwx. Notación octal (755, 644, 777). SUID/SGID: qué son y por qué son peligrosos en seguridad. ACLs básicas.</td>
+          <td><span class="practice">Configurar permisos en 10 archivos/dirs distintos. Encontrar archivos SUID: find / -perm -4000 2>/dev/null. Analizar qué significa cada resultado.</span></td>
+          <td><span class="tool-tag">Linux CLI</span></td>
+          <td><span class="result">Identificas archivos SUID potencialmente peligrosos</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">MAR</span></td>
+          <td><div class="topic">Procesos & Servicios</div><div class="subtopic">ps, top, htop, systemctl, cron</div></td>
+          <td>Árbol de procesos. PID, PPID, señales. Demonios vs procesos interactivos. Cron jobs: sintaxis y ejemplos. Journalctl.</td>
+          <td><span class="practice">ps aux | grep ssh. Monitorear CPU/RAM en tiempo real con htop. Crear cron job que ejecute un script cada minuto. Ver logs con journalctl -f.</span></td>
+          <td><span class="tool-tag">htop, systemctl</span></td>
+          <td><span class="result">Creas y gestionas servicios básicos en Linux</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">MIÉ</span></td>
+          <td><div class="topic">Modelo OSI — Capas 1-4</div><div class="subtopic">Física, Enlace, Red, Transporte</div></td>
+          <td>Por qué existe el modelo OSI. Capa 1 (bits, cables), Capa 2 (MAC, ARP, switches), Capa 3 (IP, routing, TTL), Capa 4 (TCP handshake, UDP, puertos).</td>
+          <td><span class="practice">Dibujar el flujo de un paquete HTTP desde Chrome hasta el servidor (capa a capa). Usar ping con -t para ver TTL. Capturar un TCP handshake con Wireshark en VM.</span></td>
+          <td><span class="tool-tag">Wireshark, ping</span></td>
+          <td><span class="result">Describes el viaje de un paquete en todas las capas</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">JUE</span></td>
+          <td><div class="topic">Modelo OSI — Capas 5-7</div><div class="subtopic">Sesión, Presentación, Aplicación</div></td>
+          <td>Capa 5 (sesiones, TLS handshake), Capa 6 (encoding, TLS encryption, serialización), Capa 7 (HTTP, DNS, SMTP, FTP, SSH). Por qué importan en seguridad.</td>
+          <td><span class="practice">Capturar tráfico DNS con Wireshark. Analizar una petición HTTP GET completa. Ver el TLS handshake en Wireshark (sin decrypt). Identificar los campos en cada capa.</span></td>
+          <td><span class="tool-tag">Wireshark</span></td>
+          <td><span class="result">Diseccionas cualquier captura de paquetes por capas OSI</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">VIE</span></td>
+          <td><div class="topic">TCP/IP Profundo</div><div class="subtopic">Flags, three-way handshake, puertos</div></td>
+          <td>Flags TCP (SYN, ACK, FIN, RST, PSH, URG). Three-way handshake y four-way teardown. Puertos conocidos (22, 80, 443, 445, 3389). Estado de conexiones.</td>
+          <td><span class="practice">ss -tuln para ver puertos abiertos. netstat -an. Capturar un handshake completo con Wireshark. Ejecutar nc -l 4444 y conectarse con nc localhost 4444 desde otra terminal.</span></td>
+          <td><span class="tool-tag">Wireshark, netcat, ss</span></td>
+          <td><span class="result">Identificas puertos abiertos y estados de conexión en cualquier sistema</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">Semana 3 — Python desde Cero (Parte 1)</div>
+  <div class="week-block">
+    <table>
+      <thead><tr><th>Día</th><th>Tema</th><th>Qué estudiar</th><th>Qué practicar</th><th>Herramienta</th><th>Resultado</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="day-lbl">LUN</span></td>
+          <td><div class="topic">Python — Variables y tipos</div><div class="subtopic">int, str, list, dict, bool</div></td>
+          <td>Tipos de datos en Python. Mutabilidad. F-strings. Operaciones aritméticas y de string. Type casting. None.</td>
+          <td><span class="practice">Escribir programa que pide nombre e IP, valida formato, convierte IP a binario y muestra resultado formateado. 30 líneas mínimo.</span></td>
+          <td><span class="tool-tag">Python 3, VS Code</span></td>
+          <td><span class="result">Conviertes IPs a binario desde la CLI</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">MAR</span></td>
+          <td><div class="topic">Control de flujo</div><div class="subtopic">if/elif/else, for, while, break/continue</div></td>
+          <td>Condicionales y bucles en Python. Indentación. range(). Comprensiones de lista. Operadores ternarios.</td>
+          <td><span class="practice">Escribir script que itera sobre lista de IPs, clasifica cada una (pública/privada/loopback) usando rangos RFC 1918. Output con colores usando ANSI codes.</span></td>
+          <td><span class="tool-tag">Python 3</span></td>
+          <td><span class="result">Clasificador de IPs de 40 líneas funcionando</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">MIÉ</span></td>
+          <td><div class="topic">Funciones y módulos</div><div class="subtopic">def, return, *args, **kwargs, imports</div></td>
+          <td>Definición de funciones. Alcance (scope). Módulos estándar: os, sys, re, json, datetime. Importar vs from...import.</td>
+          <td><span class="practice">Refactorizar el clasificador de IPs en funciones reutilizables. Agregar función que lee IPs desde archivo .txt usando os.path. Exportar resultados a JSON.</span></td>
+          <td><span class="tool-tag">Python 3, VS Code</span></td>
+          <td><span class="result">Script modular con funciones y I/O de archivos</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">JUE</span></td>
+          <td><div class="topic">Manejo de errores y archivos</div><div class="subtopic">try/except, open(), with statement</div></td>
+          <td>Excepciones en Python. try/except/finally. Tipos de excepciones. Leer y escribir archivos. Context managers.</td>
+          <td><span class="practice">Agregar manejo robusto de errores al script anterior. Leer archivo de IPs con try/except para cada línea. Registrar errores en error.log. Probar con entradas malformadas.</span></td>
+          <td><span class="tool-tag">Python 3</span></td>
+          <td><span class="result">Script que no se rompe con entrada inválida y registra errores</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">VIE</span></td>
+          <td><div class="topic">Python + redes: socket</div><div class="subtopic">socket básico, TCP client/server</div></td>
+          <td>El módulo socket. socket.connect(), socket.send(), socket.recv(). Diferencia TCP vs UDP en código. Timeouts.</td>
+          <td><span class="practice">Escribir port scanner básico con socket: lee lista de puertos, intenta conexión TCP, reporta abiertos/cerrados. Escanear localhost (127.0.0.1) en puertos 1-1024.</span></td>
+          <td><span class="tool-tag">Python socket</span></td>
+          <td><span class="result">Port scanner Python de 50 líneas funcionando</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">Semana 4 — Python Pt.2 + DNS/DHCP/ARP + Proyecto Fase 0</div>
+  <div class="week-block">
+    <table>
+      <thead><tr><th>Día</th><th>Tema</th><th>Qué estudiar</th><th>Qué practicar</th><th>Herramienta</th><th>Resultado</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="day-lbl">LUN</span></td>
+          <td><div class="topic">DNS en profundidad</div><div class="subtopic">A, MX, CNAME, TXT, PTR, SOA</div></td>
+          <td>Cómo funciona la resolución DNS. Tipos de registros. DNS recursivo vs autoritativo. DNSSEC. DNS como vector de ataque (DNS spoofing, tunneling).</td>
+          <td><span class="practice">nslookup google.com. dig google.com ANY. dig -x 8.8.8.8 (PTR). Explorar registros MX de 5 dominios. Usar drill o dig para ver cadena de delegación NS.</span></td>
+          <td><span class="tool-tag">dig, nslookup</span></td>
+          <td><span class="result">Consultas DNS avanzadas y comprensión de registros</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">MAR</span></td>
+          <td><div class="topic">DHCP, ARP & routing básico</div><div class="subtopic">DORA, ARP cache, tablas de ruteo</div></td>
+          <td>Proceso DORA de DHCP. ARP request/reply. MAC vs IP. Tabla de ruteo. Gateway. DHCP starvation y ARP spoofing (conceptual).</td>
+          <td><span class="practice">arp -n para ver cache ARP. ip route para ver tabla de ruteo. Capturar DHCP con Wireshark (filtro: bootp). Analizar el proceso DORA completo en la captura.</span></td>
+          <td><span class="tool-tag">Wireshark, arp, ip</span></td>
+          <td><span class="result">Analizar el proceso DORA de DHCP en captura Wireshark</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">MIÉ</span></td>
+          <td><div class="topic">Subnetting (Parte 1)</div><div class="subtopic">CIDR, máscaras, rangos</div></td>
+          <td>Notación CIDR (/24, /16, /8). Calcular rangos de red. Hosts útiles = 2^n - 2. Subredes privadas RFC 1918. Subnetting manual paso a paso.</td>
+          <td><span class="practice">Calcular a mano: 192.168.1.0/24 → rango, broadcast, hosts. Dividir 10.0.0.0/8 en 4 subredes iguales. Verificar con python -c "import ipaddress; print(list(ipaddress.ip_network('192.168.1.0/24').subnets()))"</span></td>
+          <td><span class="tool-tag">Python ipaddress</span></td>
+          <td><span class="result">Calculas subnets mentalmente para cualquier /CIDR</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">JUE</span></td>
+          <td><div class="topic">TryHackMe — Pre-Security Path</div><div class="subtopic">Módulos: Networking & Linux Fundamentals</div></td>
+          <td>Completar rooms: "What is Networking", "Intro to LAN", "OSI Model", "Linux Fundamentals 1-2".</td>
+          <td><span class="practice">Completar 4 rooms en TryHackMe con todas las respuestas correctas. Tomar notas de lo nuevo. Resolver todos los ejercicios interactivos en la plataforma.</span></td>
+          <td><span class="tool-tag">TryHackMe</span></td>
+          <td><span class="result">4 rooms completados, 200+ puntos en TryHackMe</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">VIE</span></td>
+          <td><div class="topic">PROYECTO Fase 0</div><div class="subtopic">Network Info Tool en Python</div></td>
+          <td>Integrar todo lo aprendido en un proyecto completo.</td>
+          <td><span class="practice">Construir script Python "net_recon.py": 1) Ping a lista de hosts, 2) Resolver DNS de cada host, 3) Consultar registro MX, 4) Clasificar IPs como públicas/privadas, 5) Exportar informe JSON. ~100 líneas.</span></td>
+          <td><span class="tool-tag">Python, socket, subprocess</span></td>
+          <td><span class="result">net_recon.py v1.0 en GitHub — primer proyecto de portafolio</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ FASE 1 -->
+<div id="tab-fase1" class="tab-pane">
+  <div class="phase-header">
+    <div>
+      <div class="phase-badge" style="background:var(--green-dim);color:var(--green);border:1px solid var(--green)">Fase 1 · Semanas 5–14 · 100h</div>
+      <div class="phase-title">Base Técnica — Linux Avanzado, Redes & Python Intermedio</div>
+      <div class="phase-desc">Aquí construyes el músculo técnico real. Linux se convierte en tu segundo idioma. Las redes dejan de ser magia. Python empieza a ser tu arma más poderosa.</div>
+    </div>
+    <div class="phase-meta">
+      <div class="meta-row"><span class="meta-lbl">Duración</span><span class="meta-val">10 semanas</span></div>
+      <div class="meta-row"><span class="meta-lbl">Plataformas</span><span class="meta-val">TryHackMe + HTB Starting Point</span></div>
+      <div class="meta-row"><span class="meta-lbl">Certificación</span><span class="meta-val">CompTIA Network+ (prep)</span></div>
+      <div class="meta-row"><span class="meta-lbl">Proyecto</span><span class="meta-val">Network Scanner + SIEM casero</span></div>
+    </div>
+  </div>
+
+  <div class="section-title">Skills al terminar Fase 1</div>
+  <div class="chips">
+    <span class="chip green">Shell scripting avanzado (Bash)</span>
+    <span class="chip green">Análisis de capturas Wireshark</span>
+    <span class="chip green">Subnetting sin calculadora</span>
+    <span class="chip green">Python scripts para ciberseguridad (port scanner, brute force HTTP, log analyzer)</span>
+    <span class="chip green">Configurar red virtualizada (múltiples VMs interconectadas)</span>
+    <span class="chip green">Leer y analizar logs del sistema (auth.log, syslog, access.log)</span>
+    <span class="chip green">Kali Linux instalado y configurado</span>
+  </div>
+
+  <div class="section-title">Semana 5 — Linux Avanzado: Bash Scripting & Administración</div>
+  <div class="week-block">
+    <table>
+      <thead><tr><th>Día</th><th>Tema</th><th>Qué estudiar</th><th>Qué practicar</th><th>Herramienta</th><th>Resultado</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="day-lbl">LUN</span></td>
+          <td><div class="topic">Bash scripting avanzado</div><div class="subtopic">Variables, arrays, funciones, argumentos</div></td>
+          <td>$1/$2/$@/$#. Arrays en bash. Funciones. if/case/for/while. Getopts. Heredoc. Exit codes ($?).</td>
+          <td><span class="practice">Escribir script bash "host_check.sh" que acepta -h HOST -p PORT, hace ping, intenta conexión TCP al puerto, reporta resultado con colores y exit code apropiado.</span></td>
+          <td><span class="tool-tag">Bash, nano/vim</span></td>
+          <td><span class="result">Script bash con argumentos y manejo de errores</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">MAR</span></td>
+          <td><div class="topic">Gestión de usuarios & grupos</div><div class="subtopic">useradd, passwd, /etc/shadow, sudo</div></td>
+          <td>/etc/passwd y /etc/shadow: estructura y seguridad. Hashing de contraseñas (MD5 vs SHA-512). sudo vs su. Principio de mínimo privilegio.</td>
+          <td><span class="practice">Crear usuarios con contraseñas débiles. Usar john the ripper para crackearlas (--wordlist=rockyou.txt). Analizar /etc/shadow. Configurar sudo con reglas restrictivas.</span></td>
+          <td><span class="tool-tag">John The Ripper</span></td>
+          <td><span class="result">Crackeas hashes de /etc/shadow locales con wordlist</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">MIÉ</span></td>
+          <td><div class="topic">SSH hardening & uso avanzado</div><div class="subtopic">Claves, config, port forwarding, tunnels</div></td>
+          <td>ssh-keygen, authorized_keys, sshd_config (PermitRootLogin, PasswordAuthentication). SSH tunneling: local, remote, dynamic (-L, -R, -D). SSH como vector de ataque.</td>
+          <td><span class="practice">Configurar auth por clave en 2 VMs. Deshabilitar auth por contraseña. Crear túnel SSH local: ssh -L 8080:intranet:80. Probar que el túnel funciona con curl.</span></td>
+          <td><span class="tool-tag">SSH, ssh-keygen</span></td>
+          <td><span class="result">VM accesible solo por clave SSH + túnel funcional</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">JUE</span></td>
+          <td><div class="topic">Redes en Linux: configuración y diagnóstico</div><div class="subtopic">ip, nmcli, iptables básico, tcpdump</div></td>
+          <td>ip addr, ip route, ip link. nmcli. tcpdump: capturas sin GUI. iptables: INPUT/OUTPUT/FORWARD, ACCEPT/DROP/REJECT. Conceptos de firewall.</td>
+          <td><span class="practice">Configurar IP estática con nmcli. Capturar tráfico HTTP con tcpdump -i eth0 port 80 -w captura.pcap. Abrir en Wireshark. Crear regla iptables que bloquea ping.</span></td>
+          <td><span class="tool-tag">tcpdump, iptables</span></td>
+          <td><span class="result">Capturas con tcpdump y reglas básicas de firewall</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">VIE</span></td>
+          <td><div class="topic">Kali Linux — Setup del laboratorio de ataque</div><div class="subtopic">Instalar Kali, configurar red, herramientas base</div></td>
+          <td>Por qué Kali. Kali vs Parrot vs BlackArch. Configuración recomendada. Herramientas preinstaladas más importantes.</td>
+          <td><span class="practice">Instalar Kali Linux en VirtualBox (VM separada). Configurar red en modo "Host-only" junto con la VM Ubuntu. Verificar conectividad entre VMs. Actualizar con apt update && apt upgrade.</span></td>
+          <td><span class="tool-tag">VirtualBox, Kali</span></td>
+          <td><span class="result">Lab con 2 VMs (Kali atacante + Ubuntu objetivo) en red privada</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">Semana 6 — Wireshark Profundo & Análisis de Redes</div>
+  <div class="week-block">
+    <table>
+      <thead><tr><th>Día</th><th>Tema</th><th>Qué practicar</th><th>Herramienta</th><th>Resultado</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="day-lbl">LUN</span></td>
+          <td><div class="topic">Wireshark filtros & display filters</div><div class="subtopic">BPF vs display filters</div></td>
+          <td><span class="practice">Capturar tráfico 10 min. Filtros: ip.addr==192.168.x.x, tcp.port==443, http, dns, arp. Seguir un stream TCP completo. Exportar objetos HTTP.</span></td>
+          <td><span class="tool-tag">Wireshark</span></td>
+          <td><span class="result">Extraes objetos (imágenes, archivos) de capturas HTTP</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">MAR</span></td>
+          <td><div class="topic">Análisis de protocolos: DNS, HTTP, SMB</div><div class="subtopic">Identificar credenciales en claro</div></td>
+          <td><span class="practice">Descargar pcap de malware (malware-traffic-analysis.net). Analizar DNS queries sospechosas, peticiones HTTP con headers de usuario-agente inusuales. Identificar C2 communication.</span></td>
+          <td><span class="tool-tag">Wireshark</span></td>
+          <td><span class="result">Identificas tráfico de C2 en una captura real de malware</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">MIÉ</span></td>
+          <td><div class="topic">Python + scapy: manipulación de paquetes</div><div class="subtopic">Crear, enviar, sniffar paquetes</div></td>
+          <td><span class="practice">from scapy.all import *. Crear paquete ICMP personalizado. Sniffar tráfico ARP y mostrar src/dst. Construir función que detecta ARP replies no solicitados (ARP spoofing detection).</span></td>
+          <td><span class="tool-tag">Python, scapy</span></td>
+          <td><span class="result">ARP spoof detector en 30 líneas con scapy</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">JUE</span></td>
+          <td><div class="topic">Subnetting avanzado: VLSM y diseño</div><div class="subtopic">VLSM, supernetting, diseño de red</div></td>
+          <td><span class="practice">Diseñar red para empresa de 3 departamentos (50, 25, 10 hosts) desde 192.168.10.0/24 usando VLSM. Documentar tabla con network/broadcast/hosts por subred. Verificar con Python ipaddress.</span></td>
+          <td><span class="tool-tag">Python ipaddress</span></td>
+          <td><span class="result">Diseño VLSM completo documentado para 3 subredes</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">VIE</span></td>
+          <td><div class="topic">TryHackMe — Network Exploitation Basics</div><div class="subtopic">Rooms: Nmap, Protocols & Servers</div></td>
+          <td><span class="practice">Completar rooms: "Nmap", "Network Services", "Network Services 2", "Protocols and Servers". Todas con 100% de respuestas.</span></td>
+          <td><span class="tool-tag">TryHackMe</span></td>
+          <td><span class="result">5 rooms completados, primeras flags de TryHackMe</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">Semanas 7–10 — Python Intermedio para Ciberseguridad (resumen semanal)</div>
+  <div class="week-block">
+    <table>
+      <thead><tr><th>Semana</th><th>Foco principal</th><th>Proyectos clave</th><th>Plataforma</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="day-lbl">S7</span></td>
+          <td><div class="topic">Python: requests, BeautifulSoup, APIs</div><div class="subtopic">HTTP programático, scraping, APIs REST</div></td>
+          <td><span class="practice">Script que consulta API de VirusTotal para analizar un hash MD5. Script que verifica si dominio está en listas negras (usando requests a APIs públicas).</span></td>
+          <td><span class="tool-tag">Python requests, VirusTotal API</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">S8</span></td>
+          <td><div class="topic">Python: análisis de logs</div><div class="subtopic">Parsear auth.log, nginx access.log, Windows events</div></td>
+          <td><span class="practice">Parser de auth.log que detecta brute force (>5 intentos fallidos de mismo IP en 60 seg). Generador de alertas por email con smtplib. Visualización con matplotlib.</span></td>
+          <td><span class="tool-tag">Python, regex, matplotlib</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">S9</span></td>
+          <td><div class="topic">Python: ofensivo básico</div><div class="subtopic">SSH brute force, HTTP form bruteforce, banner grabbing</div></td>
+          <td><span class="practice">Script de brute force SSH con paramiko (contra tu VM objetivo con usuario/pass débiles). HTTP form brute force contra DVWA (Damn Vulnerable Web App). SOLO en lab propio.</span></td>
+          <td><span class="tool-tag">paramiko, requests, DVWA</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">S10</span></td>
+          <td><div class="topic">Proyecto Fase 1 + HTB Starting Point</div><div class="subtopic">Network Monitor Dashboard + primera máquina HTB</div></td>
+          <td><span class="practice">Terminar "Network Monitor": combina port scanner + banner grabbing + análisis de servicios + reporte HTML. Resolver primeras 3 máquinas de HTB Starting Point (Meow, Fawn, Dancing).</span></td>
+          <td><span class="tool-tag">Python, Hack The Box</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">Semanas 11–14 — Windows Internals, Active Directory básico & Hardening</div>
+  <div class="week-block">
+    <table>
+      <thead><tr><th>Semana</th><th>Foco</th><th>Actividades clave</th><th>Herramienta</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="day-lbl">S11</span></td>
+          <td><div class="topic">Windows Internals</div><div class="subtopic">Registro, servicios, Event Viewer, PowerShell</div></td>
+          <td><span class="practice">Instalar Windows Server 2022 (eval gratuita). Explorar Registro (regedit). Revisar Event Viewer (4624, 4625, 4688). PowerShell: Get-Process, Get-Service, Get-EventLog.</span></td>
+          <td><span class="tool-tag">Windows Server, PowerShell</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">S12</span></td>
+          <td><div class="topic">Active Directory básico</div><div class="subtopic">Domain, DC, OUs, GPOs, LDAP</div></td>
+          <td><span class="practice">Configurar dominio básico con Active Directory. Crear OUs, usuarios, grupos. Aplicar GPO de contraseñas. Explorar con ldapsearch. TryHackMe room "Active Directory Basics".</span></td>
+          <td><span class="tool-tag">AD, ldapsearch, TryHackMe</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">S13</span></td>
+          <td><div class="topic">Hardening Linux</div><div class="subtopic">CIS Benchmarks, fail2ban, ufw, auditd</div></td>
+          <td><span class="practice">Aplicar CIS Benchmark Level 1 a Ubuntu: deshabilitar servicios innecesarios, configurar fail2ban para SSH, ufw con whitelist, auditd para monitoreo. Script bash de hardening automático.</span></td>
+          <td><span class="tool-tag">fail2ban, ufw, auditd</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">S14</span></td>
+          <td><div class="topic">Cryptografía práctica</div><div class="subtopic">AES, RSA, hashing, PKI, TLS</div></td>
+          <td><span class="practice">Python: cifrar/descifrar con AES usando pycryptodome. Generar par de claves RSA. Crear certificado autofirmado con openssl. Analizar handshake TLS en Wireshark. Crackear MD5 con hashcat.</span></td>
+          <td><span class="tool-tag">openssl, hashcat, Python</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ FASE 2 -->
+<div id="tab-fase2" class="tab-pane">
+  <div class="phase-header">
+    <div>
+      <div class="phase-badge" style="background:var(--cyan-dim);color:var(--cyan);border:1px solid var(--cyan)">Fase 2 · Semanas 15–22 · 80h</div>
+      <div class="phase-title">Ciberseguridad + Blue Team</div>
+      <div class="phase-desc">Aprendes a pensar como defensor antes de atacar. El Blue Team te da el contexto para entender el impacto real de cada vulnerabilidad. Esta fase = Security+ + SOC Analyst skills.</div>
+    </div>
+    <div class="phase-meta">
+      <div class="meta-row"><span class="meta-lbl">Duración</span><span class="meta-val">8 semanas</span></div>
+      <div class="meta-row"><span class="meta-lbl">Plataformas</span><span class="meta-val">TryHackMe SOC Lv1</span></div>
+      <div class="meta-row"><span class="meta-lbl">Certificación</span><span class="meta-val">CompTIA Security+ (tomar S22)</span></div>
+      <div class="meta-row"><span class="meta-lbl">Proyecto</span><span class="meta-val">Mini SOC con Wazuh</span></div>
+    </div>
+  </div>
+
+  <div class="section-title">Semana 15 — Fundamentos de Ciberseguridad: CIA, OWASP, MITRE</div>
+  <div class="week-block">
+    <table>
+      <thead><tr><th>Día</th><th>Tema</th><th>Qué estudiar</th><th>Qué practicar</th><th>Herramienta</th><th>Resultado</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="day-lbl">LUN</span></td>
+          <td><div class="topic">CIA Triad & conceptos core</div><div class="subtopic">Confidencialidad, Integridad, Disponibilidad</div></td>
+          <td>CIA Triad en profundidad con ejemplos reales. STRIDE threat model. Defense in Depth. Principio de mínimo privilegio. Zero Trust. Superficie de ataque.</td>
+          <td><span class="practice">Analizar 3 brechas reales (Equifax, SolarWinds, Colonial Pipeline): identificar qué parte de CIA se violó y por qué. Crear mapa de amenazas STRIDE para una app web ficticia.</span></td>
+          <td><span class="tool-tag">MITRE ATT&CK navegador</span></td>
+          <td><span class="result">Modelo de amenazas STRIDE documentado para una aplicación</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">MAR</span></td>
+          <td><div class="topic">OWASP Top 10 (Web)</div><div class="subtopic">Injection, Auth failures, XSS, IDOR, etc.</div></td>
+          <td>Cada uno de los 10 riesgos OWASP 2021: definición, ejemplo real, cómo se explota, cómo se mitiga. Leer la guía oficial de OWASP.</td>
+          <td><span class="practice">Instalar DVWA en Docker. Explorar y explotar manualmente: SQL Injection (nivel bajo), XSS Reflected, CSRF, File Inclusion. Documentar cada vulnerabilidad con capturas.</span></td>
+          <td><span class="tool-tag">DVWA, Docker, Burp Suite</span></td>
+          <td><span class="result">Explotas las 4 vulns OWASP principales en DVWA</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">MIÉ</span></td>
+          <td><div class="topic">MITRE ATT&CK Framework</div><div class="subtopic">Tácticas, técnicas, procedimientos (TTPs)</div></td>
+          <td>Estructura de ATT&CK: Matrices (Enterprise, Mobile, ICS). Tácticas (Initial Access → Exfiltration). Técnicas y sub-técnicas. Grupos de amenazas y software.</td>
+          <td><span class="practice">Navegar attack.mitre.org. Mapear el ataque SolarWinds a técnicas ATT&CK: T1195 (Supply Chain), T1078 (Valid Accounts). Crear "threat profile" de un APT conocido (APT29).</span></td>
+          <td><span class="tool-tag">MITRE ATT&CK, MITRE Navigator</span></td>
+          <td><span class="result">Threat profile de APT29 mapeado en MITRE Navigator</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">JUE</span></td>
+          <td><div class="topic">Criptografía aplicada</div><div class="subtopic">TLS, PKI, certificados, hashing passwords</div></td>
+          <td>TLS 1.3: handshake en detalle. Certificate chain. HSTS, HPKP. Almacenamiento seguro de contraseñas: bcrypt vs MD5. Salting. Por qué MD5/SHA1 son inseguros para passwords.</td>
+          <td><span class="practice">Verificar cadena de certificados de 3 sitios con openssl s_client -connect. Crack hash MD5 con hashcat -m 0. Comparar tiempo de crack entre MD5 y bcrypt. Generar certificado wildcard con openssl.</span></td>
+          <td><span class="tool-tag">openssl, hashcat</span></td>
+          <td><span class="result">Analizas certificados TLS y crackeas hashes débiles</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">VIE</span></td>
+          <td><div class="topic">Tipos de malware & análisis básico</div><div class="subtopic">Virus, troyanos, ransomware, RATs, rootkits</div></td>
+          <td>Clasificación de malware. Vectores de infección. Técnicas de persistencia. Indicadores de Compromiso (IoCs). Sandboxes para análisis.</td>
+          <td><span class="practice">Subir muestra de malware (cualware.exe) a any.run y examine.any.run. Analizar: procesos creados, conexiones de red, claves de registro modificadas, archivos creados. Extraer IoCs.</span></td>
+          <td><span class="tool-tag">any.run, VirusTotal</span></td>
+          <td><span class="result">Informe de análisis dinámico de malware con IoCs extraídos</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">Semana 16 — Blue Team: Logs, SIEM & Detección</div>
+  <div class="week-block">
+    <table>
+      <thead><tr><th>Día</th><th>Tema</th><th>Qué estudiar</th><th>Qué practicar</th><th>Herramienta</th><th>Resultado</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="day-lbl">LUN</span></td>
+          <td><div class="topic">Análisis de logs Linux</div><div class="subtopic">/var/log/*: auth.log, syslog, kern.log</div></td>
+          <td>Estructura de syslog. Facilidad y severidad. Importantes: auth.log (4625=login fail), syslog, dpkg.log, cron.log, apache2/access.log. Buscar patrones de ataque en logs.</td>
+          <td><span class="practice">Generar intentos fallidos de SSH. Analizar auth.log: grep "Failed password" auth.log | awk '{print $11}' | sort | uniq -c | sort -rn. Identificar el IP atacante. Crear alerta bash.</span></td>
+          <td><span class="tool-tag">grep, awk, sort</span></td>
+          <td><span class="result">Script que detecta brute force SSH desde auth.log</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">MAR</span></td>
+          <td><div class="topic">Windows Event Logs</div><div class="subtopic">Event IDs críticos: 4624, 4625, 4648, 4688, 4720</div></td>
+          <td>Estructura de Windows Event Log. Canales (Security, System, Application). IDs críticos para forense: 4624 logon, 4625 failed logon, 4688 new process, 4720 account created, 7045 new service.</td>
+          <td><span class="practice">En VM Windows: generar eventos relevantes (crear usuario, intentar login fallido). Analizar con Get-WinEvent en PowerShell. Filtrar por EventID 4625. Exportar a CSV y analizar con Python.</span></td>
+          <td><span class="tool-tag">PowerShell, Event Viewer</span></td>
+          <td><span class="result">Parser de Windows Event Logs con PowerShell</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">MIÉ</span></td>
+          <td><div class="topic">Instalar Wazuh SIEM</div><div class="subtopic">Wazuh server + agente en Ubuntu</div></td>
+          <td>Qué es un SIEM. Componentes de Wazuh: server, indexer, dashboard. Agentes. Reglas y decoders. Alertas. Por qué Wazuh para home lab.</td>
+          <td><span class="practice">Instalar Wazuh All-in-One con curl script oficial. Agregar agente en la VM Ubuntu. Verificar que logs de auth.log llegan al SIEM. Abrir dashboard y confirmar alertas de nivel 5+.</span></td>
+          <td><span class="tool-tag">Wazuh</span></td>
+          <td><span class="result">SIEM funcional recibiendo eventos de VM Ubuntu</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">JUE</span></td>
+          <td><div class="topic">Wazuh: reglas y alertas</div><div class="subtopic">Crear reglas personalizadas, dashboards</div></td>
+          <td>Sintaxis de reglas Wazuh (XML). Decoders. Threat intel integration. Dashboards en OpenSearch. Active responses.</td>
+          <td><span class="practice">Crear regla personalizada que detecta cuando alguien ejecuta "sudo bash". Configurar alerta por email. Generar el evento y verificar que llega. Crear dashboard con top 10 IPs atacantes.</span></td>
+          <td><span class="tool-tag">Wazuh</span></td>
+          <td><span class="result">Regla personalizada + dashboard en Wazuh funcionando</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">VIE</span></td>
+          <td><div class="topic">TryHackMe — SOC Level 1 Path</div><div class="subtopic">Phishing Analysis, SIEM rooms</div></td>
+          <td>Completar rooms del SOC Level 1: "SIEM", "Phishing Emails in Action", "Phishing Analysis Tools".</td>
+          <td><span class="practice">3 rooms con 100%. Documentar técnicas de análisis de phishing: headers de email, análisis de URLs, sandboxing de adjuntos. Crear checklist de análisis de phishing.</span></td>
+          <td><span class="tool-tag">TryHackMe, MXToolbox</span></td>
+          <td><span class="result">Checklist profesional de análisis de phishing</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">Semanas 17–22 — Blue Team Avanzado + Security+ (resumen)</div>
+  <div class="week-block">
+    <table>
+      <thead><tr><th>Semana</th><th>Foco</th><th>Actividades</th><th>Herramientas</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="day-lbl">S17</span></td>
+          <td><div class="topic">Incident Response & Digital Forensics</div><div class="subtopic">DFIR: memoria, disco, timeline</div></td>
+          <td><span class="practice">Volatility3 para análisis de memoria: voltar.py -f memoria.raw windows.pslist, windows.netscan. Autopsy para análisis de imagen de disco. TryHackMe room "Autopsy".</span></td>
+          <td><span class="tool-tag">Volatility3, Autopsy</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">S18</span></td>
+          <td><div class="topic">Threat Intelligence</div><div class="subtopic">OSINT, feeds, IOC management</div></td>
+          <td><span class="practice">TheHive + Cortex para gestión de incidentes. MISP para compartir IoCs. OpenCTI. Consultar feeds: AlienVault OTX, abuse.ch. Enriquecer IoC con múltiples fuentes automáticamente.</span></td>
+          <td><span class="tool-tag">MISP, TheHive, OTX</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">S19-20</span></td>
+          <td><div class="topic">Security+ — Estudio intensivo</div><div class="subtopic">Dominios: Threats, Architecture, Implementation</div></td>
+          <td><span class="practice">Estudiar con Professor Messer (gratis en YouTube) + Jason Dion Udemy. 2h/día: 1h teoría + 1h preguntas de práctica. Objetivo: 85%+ en exámenes de práctica antes del real.</span></td>
+          <td><span class="tool-tag">Udemy, Professor Messer</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">S21</span></td>
+          <td><div class="topic">PROYECTO: Mini SOC en casa</div><div class="subtopic">Wazuh + ELK + reglas avanzadas</div></td>
+          <td><span class="practice">Expandir Wazuh: agregar agente Windows, reglas para detectar mimikatz, configurar active response que bloquea IPs atacantes, dashboard con métricas semanales de alertas.</span></td>
+          <td><span class="tool-tag">Wazuh, OpenSearch</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">S22</span></td>
+          <td><div class="topic">Tomar examen Security+</div><div class="subtopic">CompTIA SY0-701</div></td>
+          <td><span class="practice">Examen Security+ (SY0-701). 90 preguntas, 90 minutos. Aprobado: 750/900. Esta certificación abre la puerta para roles de SOC Analyst Tier 1 y muchas posiciones entry-level.</span></td>
+          <td><span class="tool-tag">Pearson VUE</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ FASE 3 -->
+<div id="tab-fase3" class="tab-pane">
+  <div class="phase-header">
+    <div>
+      <div class="phase-badge" style="background:var(--orange-dim);color:var(--orange);border:1px solid var(--orange)">Fase 3 · Semanas 23–32 · 100h</div>
+      <div class="phase-title">Red Team — Ethical Hacking & Pentesting</div>
+      <div class="phase-desc">Aprendes a atacar de forma sistemática. Reconocimiento, explotación, post-explotación y reporte. Al final tienes skills reales de pentester y eJPT / preparación para CEH.</div>
+    </div>
+    <div class="phase-meta">
+      <div class="meta-row"><span class="meta-lbl">Duración</span><span class="meta-val">10 semanas</span></div>
+      <div class="meta-row"><span class="meta-lbl">Plataformas</span><span class="meta-val">TryHackMe Jr Pentester + HTB</span></div>
+      <div class="meta-row"><span class="meta-lbl">Certificaciones</span><span class="meta-val">eJPT → CEH</span></div>
+      <div class="meta-row"><span class="meta-lbl">Proyecto</span><span class="meta-val">Pentest Report completo</span></td></div>
+    </div>
+  </div>
+
+  <div class="section-title">Semana 23 — Metodología Pentesting & Reconocimiento con Nmap</div>
+  <div class="week-block">
+    <table>
+      <thead><tr><th>Día</th><th>Tema</th><th>Qué estudiar</th><th>Qué practicar</th><th>Herramienta</th><th>Resultado</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="day-lbl">LUN</span></td>
+          <td><div class="topic">Metodología de pentesting</div><div class="subtopic">PTES, OWASP Testing Guide, fases</div></td>
+          <td>Fases: Reconocimiento → Escaneo → Explotación → Post-explotación → Reporting. PTES Technical Guidelines. Reglas de compromiso (Rules of Engagement). Tipos de pentest (black/white/grey box).</td>
+          <td><span class="practice">Leer capítulo 1 de Penetration Testing de Georgia Weidman. Crear plantilla de Rules of Engagement para un pentest ficticio. Definir alcance, objetivos y limitaciones.</span></td>
+          <td><span class="tool-tag">Papel + Google Docs</span></td>
+          <td><span class="result">Plantilla de Rules of Engagement profesional</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">MAR</span></td>
+          <td><div class="topic">Nmap: escaneo de puertos</div><div class="subtopic">TCP SYN, UDP, versiones, scripts NSE</div></td>
+          <td>Tipos de escaneo: -sS (SYN), -sT (TCP connect), -sU (UDP), -sV (versiones), -O (OS detection), -A (todo). Timing (-T0 a -T5). Firewall evasion. Nmap Scripting Engine (NSE).</td>
+          <td><span class="practice">nmap -sS -sV -O -p- --open -T4 192.168.x.x (tu VM Ubuntu). nmap --script vuln TARGET. nmap --script smb-vuln-ms17-010 TARGET. Analizar y documentar resultados en tabla.</span></td>
+          <td><span class="tool-tag">Nmap</span></td>
+          <td><span class="result">Reporte de Nmap completo con versiones y vulnerabilidades</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">MIÉ</span></td>
+          <td><div class="topic">OSINT & Reconocimiento pasivo</div><div class="subtopic">whois, shodan, google dorks, theHarvester</div></td>
+          <td>Fuentes OSINT: Whois, DNS pasivo, Shodan, Censys, Google Dorks, LinkedIn, GitHub leaks, Pastebin. Maltego para relaciones. theHarvester para emails.</td>
+          <td><span class="practice">OSINT sobre empresa ficticia: theHarvester -d example.com -b google,bing,linkedin. Google dorks: site:example.com filetype:pdf intitle:confidential. Shodan: org:"empresa". Documentar hallazgos.</span></td>
+          <td><span class="tool-tag">theHarvester, Shodan, Google</span></td>
+          <td><span class="result">Informe OSINT de 2 páginas con hallazgos documentados</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">JUE</span></td>
+          <td><div class="topic">Reconocimiento activo: Nikto, Gobuster, Dirb</div><div class="subtopic">Web fuzzing y enumeración de servicios</div></td>
+          <td>Nikto: scanner de vulnerabilidades web. Gobuster/Dirb: fuerza bruta de directorios. Wfuzz. Enumeración de SMB (enum4linux, smbclient). Enumeración SNMP (snmpwalk).</td>
+          <td><span class="practice">Contra DVWA: nikto -h http://dvwa. gobuster dir -u http://dvwa -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt. enum4linux -a 192.168.x.x. Documentar cada hallazgo.</span></td>
+          <td><span class="tool-tag">Nikto, Gobuster, enum4linux</span></td>
+          <td><span class="result">Enumeración completa de DVWA con todos sus endpoints</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">VIE</span></td>
+          <td><div class="topic">Instalar y configurar Metasploitable2</div><div class="subtopic">VM vulnerable para práctica de pentest</div></td>
+          <td>Metasploitable2: VM intencionalmente vulnerable para práctica. Servicios vulnerables: vsftpd 2.3.4, Unreal IRCd, DVWA, Mutillidae, phpMyAdmin. Reglas: nunca exponer a internet.</td>
+          <td><span class="practice">Descargar Metasploitable2 e importar a VirtualBox. Conectar en red host-only con Kali. Hacer reconocimiento completo: nmap -A, nikto, enum4linux. Listar todos los servicios con versiones.</span></td>
+          <td><span class="tool-tag">Metasploitable2, Nmap</span></td>
+          <td><span class="result">Lab completo: Kali → Metasploitable2, reconocimiento documentado</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">Semana 24 — Explotación con Metasploit</div>
+  <div class="week-block">
+    <table>
+      <thead><tr><th>Día</th><th>Tema</th><th>Qué practicar</th><th>Herramienta</th><th>Resultado</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="day-lbl">LUN</span></td>
+          <td><div class="topic">Metasploit Framework — Arquitectura</div><div class="subtopic">msfconsole, módulos, payloads, sessions</div></td>
+          <td><span class="practice">msfconsole. Explorar: search vsftpd. use exploit/unix/ftp/vsftpd_234_backdoor. show options. set RHOSTS. run. Obtener shell en Metasploitable. id; whoami; uname -a.</span></td>
+          <td><span class="tool-tag">Metasploit</span></td>
+          <td><span class="result">Primera shell remota en Metasploitable via Metasploit</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">MAR</span></td>
+          <td><div class="topic">Meterpreter & post-explotación</div><div class="subtopic">sysinfo, getuid, hashdump, pivoting</div></td>
+          <td><span class="practice">Usar exploit/multi/handler con meterpreter. sysinfo, getuid, getsystem (privilege escalation). hashdump (extraer hashes de contraseñas). upload/download. screenshare. run post/multi/recon/local_exploit_suggester.</span></td>
+          <td><span class="tool-tag">Meterpreter</span></td>
+          <td><span class="result">Post-explotación completa: hashes extraídos, priv escal logrado</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">MIÉ</span></td>
+          <td><div class="topic">Web exploitation: SQL Injection manual</div><div class="subtopic">Error-based, UNION, blind SQLi</div></td>
+          <td><span class="practice">DVWA SQLi (level low→medium). Manual: ' OR 1=1--. UNION SELECT 1,2,3--. Extraer tabla de usuarios. sqlmap -u "http://dvwa/vulnerable.php?id=1" --dbs --tables --dump. Entender la diferencia: manual vs automático.</span></td>
+          <td><span class="tool-tag">Burp Suite, sqlmap</span></td>
+          <td><span class="result">Extraes todos los usuarios/hashes de DVWA via SQLi</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">JUE</span></td>
+          <td><div class="topic">Burp Suite — Interceptar y manipular</div><div class="subtopic">Proxy, Repeater, Intruder, Scanner</div></td>
+          <td><span class="practice">Configurar FoxyProxy + Burp. Interceptar login de DVWA. Modificar request en Repeater. Usar Intruder para brute force del login (Sniper attack con rockyou.txt top 100). Analizar respuesta 302 vs 200.</span></td>
+          <td><span class="tool-tag">Burp Suite, FoxyProxy</span></td>
+          <td><span class="result">Brute force de login exitoso con Burp Intruder</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">VIE</span></td>
+          <td><div class="topic">XSS, CSRF, LFI/RFI</div><div class="subtopic">Client-side attacks en DVWA</div></td>
+          <td><span class="practice">DVWA XSS Reflected + Stored: inyectar <script>alert(document.cookie)</script>. Cookie stealing. CSRF: crear formulario malicioso que cambia contraseña. LFI: ?page=../../../../etc/passwd. RFI (si disponible).</span></td>
+          <td><span class="tool-tag">Burp Suite, DVWA</span></td>
+          <td><span class="result">XSS cookie stealer funcionando + CSRF form documentado</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">Semanas 25–32 — Pentesting Avanzado, CTFs & Certificaciones (resumen)</div>
+  <div class="week-block">
+    <table>
+      <thead><tr><th>Semana</th><th>Foco</th><th>Actividades principales</th><th>Herramientas</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="day-lbl">S25</span></td>
+          <td><div class="topic">Privilege Escalation Linux</div><div class="subtopic">SUID, sudo -l, cron, writable paths</div></td>
+          <td><span class="practice">TryHackMe room "Linux PrivEsc". LinPEAS: linux-smart-enumeration. Explotar SUID /usr/bin/find, cron writable script, sudo misconfiguration. Cada técnica documentada con PoC.</span></td>
+          <td><span class="tool-tag">LinPEAS, GTFOBins</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">S26</span></td>
+          <td><div class="topic">Privilege Escalation Windows</div><div class="subtopic">Unquoted service paths, AlwaysInstallElevated</div></td>
+          <td><span class="practice">TryHackMe room "Windows PrivEsc". WinPEAS. Explotar: unquoted service paths, AlwaysInstallElevated, weak service permissions. Mimikatz para extraer credenciales LSASS.</span></td>
+          <td><span class="tool-tag">WinPEAS, Mimikatz</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">S27-28</span></td>
+          <td><div class="topic">Hack The Box — Máquinas Easy</div><div class="subtopic">10 máquinas easy sin walkthrough</div></td>
+          <td><span class="practice">Resolver 10 máquinas Easy de HTB: Lame, Legacy, Devel, Optimum, Beep, Granny, Arctic, Blue, Jerry, Bastard. Cada una sin walkthrough primero (máx 2h). Luego revisar writeup y comparar.</span></td>
+          <td><span class="tool-tag">Hack The Box, Kali</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">S29</span></td>
+          <td><div class="topic">Active Directory Attacks</div><div class="subtopic">Kerberoasting, Pass-the-Hash, BloodHound</div></td>
+          <td><span class="practice">Lab AD vulnerable (VulnAD). Kerberoasting con Impacket. Pass-the-Hash con CrackMapExec. BloodHound para mapear rutas de ataque en AD. TryHackMe room "Compromising Active Directory".</span></td>
+          <td><span class="tool-tag">Impacket, BloodHound, CME</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">S30</span></td>
+          <td><div class="topic">Evasión de defensas básica</div><div class="subtopic">AV evasion, encoding, obfuscation</div></td>
+          <td><span class="practice">msfvenom para generar payloads: -f exe -e x86/shikata_ga_nai. Probar detección en VirusTotal. Técnicas de obfuscación PowerShell. TryHackMe room "AV Evasion: Shellcode".</span></td>
+          <td><span class="tool-tag">msfvenom, Veil-Evasion</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">S31</span></td>
+          <td><div class="topic">Examen eJPT</div><div class="subtopic">eLearnSecurity Junior Penetration Tester</div></td>
+          <td><span class="practice">Curso eJPT de INE (gratuito). Examen práctico de 48h: pentest real en entorno virtualizado. Precio ~$200. Válida 2 años. Primera cert de pentesting reconocida.</span></td>
+          <td><span class="tool-tag">INE Platform</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">S32</span></td>
+          <td><div class="topic">PROYECTO: Pentest Report completo</div><div class="subtopic">Informe profesional de pentest en Metasploitable</div></td>
+          <td><span class="practice">Realizar pentest completo en Metasploitable2 como si fuera cliente real. Documentar con plantilla CVSS: executive summary, hallazgos por riesgo (Crítico/Alto/Medio/Bajo), evidencias, recomendaciones. 15+ páginas.</span></td>
+          <td><span class="tool-tag">Todas las herramientas previas</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ FASE 4 -->
+<div id="tab-fase4" class="tab-pane">
+  <div class="phase-header">
+    <div>
+      <div class="phase-badge" style="background:var(--amber-dim);color:var(--amber);border:1px solid var(--amber)">Fase 4 · Semanas 33–40 · 80h</div>
+      <div class="phase-title">Cloud Security — Microsoft Azure</div>
+      <div class="phase-desc">Azure es el cloud más demandado en enterprise. Esta fase te convierte en Cloud Security Engineer. AZ-500 es una de las certificaciones más valoradas del sector.</div>
+    </div>
+    <div class="phase-meta">
+      <div class="meta-row"><span class="meta-lbl">Duración</span><span class="meta-val">8 semanas</span></div>
+      <div class="meta-row"><span class="meta-lbl">Certificaciones</span><span class="meta-val">AZ-900 → AZ-500 → SC-200</span></div>
+      <div class="meta-row"><span class="meta-lbl">Lab</span><span class="meta-val">Azure Free Tier ($200 crédito)</span></div>
+      <div class="meta-row"><span class="meta-lbl">Proyecto</span><span class="meta-val">Arquitectura cloud segura</span></div>
+    </div>
+  </div>
+
+  <div class="section-title">Semana 33 — Azure Fundamentals & IAM</div>
+  <div class="week-block">
+    <table>
+      <thead><tr><th>Día</th><th>Tema</th><th>Qué estudiar</th><th>Qué practicar</th><th>Herramienta</th><th>Resultado</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="day-lbl">LUN</span></td>
+          <td><div class="topic">Azure arquitectura core</div><div class="subtopic">Regiones, availability zones, resource groups, subscriptions</div></td>
+          <td>Jerarquía Azure: Management Groups → Subscriptions → Resource Groups → Resources. Modelos de servicio: IaaS, PaaS, SaaS en Azure. Responsabilidad compartida.</td>
+          <td><span class="practice">Crear cuenta Azure Free. Explorar portal.azure.com. Crear Resource Group "security-lab". Crear VM Ubuntu (B1s), configurar NSG solo con SSH. Conectar via SSH. Calcular costo estimado.</span></td>
+          <td><span class="tool-tag">Azure Portal</span></td>
+          <td><span class="result">VM Azure funcionando con NSG restrictivo</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">MAR</span></td>
+          <td><div class="topic">Azure Active Directory (Entra ID)</div><div class="subtopic">Tenants, usuarios, grupos, roles</div></td>
+          <td>Azure AD vs on-prem AD. Conceptos: tenant, directory, UPN. Tipos de identidades: usuarios, service principals, managed identities. Licencias (Free vs P1 vs P2). Guest users (B2B).</td>
+          <td><span class="practice">Crear 5 usuarios en Azure AD. Crear grupos de seguridad. Asignar roles built-in (Reader, Contributor, Owner) a grupos. Verificar permisos mínimos necesarios para cada rol. Revisar audit logs.</span></td>
+          <td><span class="tool-tag">Azure AD (Entra ID), Azure Portal</span></td>
+          <td><span class="result">Estructura IAM con usuarios, grupos y roles RBAC configurada</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">MIÉ</span></td>
+          <td><div class="topic">Conditional Access & MFA</div><div class="subtopic">Políticas de acceso condicional, passwordless</div></td>
+          <td>Conditional Access: condiciones (ubicación, dispositivo, riesgo) y controles (MFA, bloqueo, compliance). MFA: TOTP, FIDO2, Authenticator app. Identity Protection: sign-in risk, user risk. PIM (Privileged Identity Management).</td>
+          <td><span class="practice">Crear política de Conditional Access: requerir MFA para todos excepto desde IP de oficina. Configurar MFA con Microsoft Authenticator. Activar Identity Protection. Simular sign-in riesgoso y ver la alerta.</span></td>
+          <td><span class="tool-tag">Azure AD, Conditional Access</span></td>
+          <td><span class="result">Política MFA funcionando + Identity Protection activo</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">JUE</span></td>
+          <td><div class="topic">Network Security en Azure</div><div class="subtopic">VNet, NSG, Azure Firewall, Bastion</div></td>
+          <td>Virtual Networks: subnets, peering. Network Security Groups: reglas inbound/outbound, prioridad, default deny. Azure Firewall vs NSG. Azure Bastion (acceso sin puertos expuestos). Private endpoints.</td>
+          <td><span class="practice">Crear VNet con 3 subnets (Web, App, DB). NSG para cada subnet con reglas de mínimo privilegio: Web solo 80/443, App solo desde Web subnet, DB solo desde App subnet. Configurar Azure Bastion para acceso SSH.</span></td>
+          <td><span class="tool-tag">Azure VNet, NSG, Bastion</span></td>
+          <td><span class="result">Arquitectura 3-tier con NSGs de mínimo privilegio</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">VIE</span></td>
+          <td><div class="topic">Azure Key Vault & Secretos</div><div class="subtopic">Secretos, claves, certificados, managed identity</div></td>
+          <td>Key Vault: tipos de objetos (secrets, keys, certificates). Access policies vs RBAC. Managed Identity: system-assigned vs user-assigned. Por qué nunca hardcodear credenciales en código.</td>
+          <td><span class="practice">Crear Key Vault. Almacenar connection string de DB como secret. Crear VM con system-assigned managed identity. Configurar Key Vault access policy para la managed identity. Recuperar el secret desde la VM sin credenciales en código.</span></td>
+          <td><span class="tool-tag">Azure Key Vault, Azure CLI</span></td>
+          <td><span class="result">App que recupera secrets de Key Vault via Managed Identity</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">Semanas 34–40 — AZ-500, Microsoft Defender & SC-200 (resumen)</div>
+  <div class="week-block">
+    <table>
+      <thead><tr><th>Semana</th><th>Foco</th><th>Actividades</th><th>Herramientas</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="day-lbl">S34</span></td>
+          <td><div class="topic">Microsoft Defender for Cloud</div><div class="subtopic">Secure Score, recomendaciones, CSPM</div></td>
+          <td><span class="practice">Habilitar Defender for Cloud en suscripción. Revisar Secure Score (objetivo: 70%+). Implementar 10 recomendaciones de seguridad. Configurar export continuo a Log Analytics. Revisar Regulatory Compliance (ISO 27001, CIS).</span></td>
+          <td><span class="tool-tag">Microsoft Defender for Cloud</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">S35</span></td>
+          <td><div class="topic">Microsoft Sentinel — SIEM cloud</div><div class="subtopic">Conectores, reglas analíticas, playbooks</div></td>
+          <td><span class="practice">Crear workspace Log Analytics. Habilitar Sentinel. Conectar: Azure AD, Activity Logs, Defender for Cloud. Crear regla analítica para detectar múltiples logins fallidos. Crear Playbook (Logic App) que envía alerta por Teams.</span></td>
+          <td><span class="tool-tag">Microsoft Sentinel, Logic Apps</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">S36</span></td>
+          <td><div class="topic">Pentesting en Azure</div><div class="subtopic">Misconfiguraciones comunes, enumerar desde Kali</div></td>
+          <td><span class="practice">Azure CLI: az account list, az vm list. Enumerar con ROADtools y AzureHound. Buscar storage accounts públicos: az storage account list --query "[?properties.allowBlobPublicAccess==true]". Documentar hallazgos.</span></td>
+          <td><span class="tool-tag">Azure CLI, ROADtools, AzureHound</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">S37-38</span></td>
+          <td><div class="topic">Preparación AZ-500</div><div class="subtopic">Manage identity, secure networking, manage security ops</div></td>
+          <td><span class="practice">Curso oficial Microsoft Learn (gratis). John Savill's AZ-500 series YouTube. MeasureUp practice exam. 200 preguntas de práctica con análisis de errores. Objetivo: 85%+ en mock exams.</span></td>
+          <td><span class="tool-tag">Microsoft Learn, MeasureUp</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">S39</span></td>
+          <td><div class="topic">Examen AZ-500 + PROYECTO</div><div class="subtopic">Azure Security Engineer Associate</div></td>
+          <td><span class="practice">Tomar examen AZ-500 ($165). Paralelamente: proyecto "Arquitectura cloud segura": VNet + NSG + Bastion + Key Vault + Defender + Sentinel integrados. README detallado en GitHub con arquitectura.</span></td>
+          <td><span class="tool-tag">Azure Portal, GitHub</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">S40</span></td>
+          <td><div class="topic">Preparación y examen SC-200</div><div class="subtopic">Microsoft Security Operations Analyst</div></td>
+          <td><span class="practice">SC-200 cubre: Defender suite, Sentinel, KQL para threat hunting. Completar Microsoft Learn SC-200 path. KQL queries: SecurityEvent | where EventID==4625 | summarize count() by TargetUserName. Tomar examen SC-200.</span></td>
+          <td><span class="tool-tag">KQL, Microsoft Sentinel</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ FASE 5 -->
+<div id="tab-fase5" class="tab-pane">
+  <div class="phase-header">
+    <div>
+      <div class="phase-badge" style="background:var(--purple-dim);color:var(--purple);border:1px solid var(--purple)">Fase 5 · Semanas 41–48 · 80h</div>
+      <div class="phase-title">Especialización & Empleabilidad</div>
+      <div class="phase-desc">DevSecOps, API Security, IA aplicada, portafolio profesional y estrategia de búsqueda de empleo. Al final de esta fase estás listo para entrevistas técnicas y tu primer trabajo.</div>
+    </div>
+    <div class="phase-meta">
+      <div class="meta-row"><span class="meta-lbl">Duración</span><span class="meta-val">8 semanas</span></div>
+      <div class="meta-row"><span class="meta-lbl">Resultado</span><span class="meta-val">Empleable en ciberseguridad</span></div>
+      <div class="meta-row"><span class="meta-lbl">Próximo</span><span class="meta-val">OSCP (6–12 meses)</span></div>
+    </div>
+  </div>
+
+  <div class="section-title">Semana 41 — DevSecOps & Seguridad en CI/CD</div>
+  <div class="week-block">
+    <table>
+      <thead><tr><th>Día</th><th>Tema</th><th>Qué practicar</th><th>Herramienta</th><th>Resultado</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="day-lbl">LUN</span></td>
+          <td><div class="topic">DevSecOps: shift left</div><div class="subtopic">SAST, DAST, SCA en pipeline</div></td>
+          <td><span class="practice">Crear repo GitHub con una app Python vulnerable. Configurar GitHub Actions con: Bandit (SAST), Safety (SCA para deps), Semgrep (SAST). Ver los issues detectados automáticamente en cada push.</span></td>
+          <td><span class="tool-tag">GitHub Actions, Bandit, Semgrep</span></td>
+          <td><span class="result">Pipeline CI/CD con 3 herramientas de seguridad integradas</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">MAR</span></td>
+          <td><div class="topic">Container Security</div><div class="subtopic">Docker security, Trivy, Falco</div></td>
+          <td><span class="practice">Escanear imágenes Docker con Trivy: trivy image nginx:latest. Identificar CVEs críticos. Crear Dockerfile con best practices (non-root user, no SUID, read-only filesystem). Configurar Falco para detección en runtime.</span></td>
+          <td><span class="tool-tag">Docker, Trivy, Falco</span></td>
+          <td><span class="result">Dockerfile hardened + Trivy en CI/CD + Falco activo</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">MIÉ</span></td>
+          <td><div class="topic">Infrastructure as Code Security</div><div class="subtopic">Terraform + Checkov/tfsec</div></td>
+          <td><span class="practice">Escribir Terraform para crear VM Azure. Escanear con Checkov: checkov -d . y con tfsec. Identificar y corregir 5+ problemas de seguridad (storage account público, NSG permisivo). Re-escanear y verificar.</span></td>
+          <td><span class="tool-tag">Terraform, Checkov, tfsec</span></td>
+          <td><span class="result">Infraestructura Azure deployada via Terraform con 0 findings críticos</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">JUE</span></td>
+          <td><div class="topic">Secrets scanning & Supply Chain</div><div class="subtopic">gitleaks, dependency confusion</div></td>
+          <td><span class="practice">gitleaks detect en varios repos de GitHub (incluye repos públicos conocidos). Encontrar credenciales expuestas. Configurar pre-commit hook con gitleaks para prevenir commits con secrets. SBOM con syft.</span></td>
+          <td><span class="tool-tag">gitleaks, syft</span></td>
+          <td><span class="result">Pre-commit hook que previene commits con secrets</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">VIE</span></td>
+          <td><div class="topic">API Security — OWASP API Top 10</div><div class="subtopic">BOLA, Broken Auth, Mass Assignment</div></td>
+          <td><span class="practice">Instalar OWASP crAPI (vulnerable API). Explotar: BOLA (acceder datos de otro usuario), Mass Assignment (escalar privilegios), BFLA (acceder a función admin). Documentar cada vuln con PoC y CVSS.</span></td>
+          <td><span class="tool-tag">Burp Suite, crAPI, Postman</span></td>
+          <td><span class="result">3 vulnerabilidades OWASP API Top 10 explotadas y documentadas</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">Semanas 42–48 — IA en Ciberseguridad, Portafolio & Empleo</div>
+  <div class="week-block">
+    <table>
+      <thead><tr><th>Semana</th><th>Foco</th><th>Actividades</th><th>Resultado</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="day-lbl">S42</span></td>
+          <td><div class="topic">IA aplicada a ciberseguridad</div><div class="subtopic">LLMs para análisis, detección, automatización</div></td>
+          <td><span class="practice">Usar Claude/GPT-4 para: analizar código en busca de vulnerabilidades, generar reglas SIEM desde descripciones en lenguaje natural, automatizar análisis de IoCs. Crear herramienta Python que usa API de OpenAI para analizar logs sospechosos.</span></td>
+          <td><span class="result">Script: log_analyzer_ai.py que clasifica eventos con LLM</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">S43</span></td>
+          <td><div class="topic">Bug Bounty — primeros reportes</div><div class="subtopic">HackerOne, Bugcrowd, programas scope</div></td>
+          <td><span class="practice">Crear perfil en HackerOne y Bugcrowd. Elegir 3 programas con scope amplio y bounty bajo (para aprender). Metodología: reconocimiento → fuzzing → validación → reporte. Escribir primer reporte profesional aunque no sea válido.</span></td>
+          <td><span class="result">Perfil en plataformas + metodología de bug bounty documentada</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">S44</span></td>
+          <td><div class="topic">HTB/TryHackMe avanzado + CTFs</div><div class="subtopic">Máquinas Medium, CTF competitions</div></td>
+          <td><span class="practice">5 máquinas HTB Medium (Forest, Active, Resolute, Remote, Sauna). Participar en un CTF online (CTFtime.org). Cada máquina → writeup en GitHub/blog personal. Objetivo: top 50% en al menos un CTF.</span></td>
+          <td><span class="result">5 writeups publicados + CTF participation badge</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">S45</span></td>
+          <td><div class="topic">Construir portafolio profesional</div><div class="subtopic">GitHub, blog técnico, LinkedIn</div></td>
+          <td><span class="practice">GitHub: README profesional, organizar repos con documentación. Blog (GitHub Pages o hashnode.dev): publicar 3 artículos técnicos. LinkedIn: optimizar con keywords de ciberseguridad, conectar con 50+ profesionales del sector.</span></td>
+          <td><span class="result">Portafolio online completo + 3 artículos técnicos publicados</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">S46</span></td>
+          <td><div class="topic">CV & estrategia de búsqueda de trabajo</div><div class="subtopic">ATS optimization, LinkedIn, aplicaciones</div></td>
+          <td><span class="practice">CV técnico de 2 páginas: certificaciones en lugar prominente, proyectos con impacto cuantificado ("reducé tiempo de detección en 40%"). Aplicar a 10 posiciones en LinkedIn: Security Analyst, SOC Analyst, Cloud Security. Enviar mensaje directo a hiring managers.</span></td>
+          <td><span class="result">CV + 10 aplicaciones enviadas</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">S47</span></td>
+          <td><div class="topic">Preparación entrevistas técnicas</div><div class="subtopic">Preguntas técnicas, home labs, white-boarding</div></td>
+          <td><span class="practice">Practicar preguntas frecuentes: "¿Cuál es la diferencia entre IDS e IPS?", "¿Qué harías al descubrir una infección activa?", "Explica un pentest de principio a fin". Mock interviews con pares en Discord communities (TryHackMe, HTB Discord).</span></td>
+          <td><span class="result">30 preguntas técnicas respondidas fluidamente</span></td>
+        </tr>
+        <tr>
+          <td><span class="day-lbl">S48</span></td>
+          <td><div class="topic">Primer trabajo + siguiente nivel</div><div class="subtopic">Plan de carrera post-empleo</div></td>
+          <td><span class="practice">Continuar aplicando activamente. Plan siguiente nivel: OSCP (6-12 meses), CISSP (3-5 años experiencia), especializarse en Cloud Security o AppSec. Unirse a equipos de CTF. Contribuir a proyectos open source de seguridad.</span></td>
+          <td><span class="result">Oferta de trabajo aceptada o pipeline activo de entrevistas</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ TOOLS -->
+<div id="tab-tools" class="tab-pane">
+  <div class="section-title">Herramientas por categoría y fase de uso</div>
+  <div class="tool-grid">
+
+    <div class="tool-card">
+      <div class="tool-header">
+        <div class="tool-icon" style="background:#1a2a1a">🌐</div>
+        <div><div class="tool-name">Nmap</div><div class="tool-phase">Fase 1 → presente</div></div>
+      </div>
+      <div class="tool-desc">Escáner de red y puertos. Detecta hosts activos, servicios, versiones y vulnerabilidades mediante scripts NSE. Es la primera herramienta de cualquier reconocimiento.</div>
+      <div class="tool-cmd">nmap -sV -sC -p- --open -T4 -oN scan.txt TARGET</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-header">
+        <div class="tool-icon" style="background:#1a1a2a">📡</div>
+        <div><div class="tool-name">Wireshark</div><div class="tool-phase">Fase 0 → Blue Team</div></div>
+      </div>
+      <div class="tool-desc">Analizador de protocolos de red. Captura y disecciona paquetes en tiempo real. Esencial para entender tráfico malicioso, análisis forense de red y debugging.</div>
+      <div class="tool-cmd">Filtro: tcp.port==80 && http.request.method=="POST"</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-header">
+        <div class="tool-icon" style="background:#2a1a1a">🎯</div>
+        <div><div class="tool-name">Burp Suite</div><div class="tool-phase">Fase 3 → presente</div></div>
+      </div>
+      <div class="tool-desc">Proxy para interceptar y manipular tráfico HTTP/S. Módulos: Proxy, Repeater, Intruder (brute force), Scanner (vuln scanning), Decoder, Comparer. Estándar de la industria para web pentesting.</div>
+      <div class="tool-cmd">Proxy → 127.0.0.1:8080 → FoxyProxy → Intercept ON</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-header">
+        <div class="tool-icon" style="background:#2a1a0a">⚡</div>
+        <div><div class="tool-name">Metasploit Framework</div><div class="tool-phase">Fase 3 → Pentest</div></div>
+      </div>
+      <div class="tool-desc">Framework de explotación más usado en pentesting. Contiene exploits, payloads (incluyendo Meterpreter), módulos de post-explotación y auxiliares. Automatiza la explotación de vulnerabilidades conocidas.</div>
+      <div class="tool-cmd">msfconsole → search ms17-010 → use 0 → set RHOSTS IP → run</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-header">
+        <div class="tool-icon" style="background:#1a2a2a">🔑</div>
+        <div><div class="tool-name">Hashcat</div><div class="tool-phase">Fase 1 → Pentesting</div></div>
+      </div>
+      <div class="tool-desc">Cracker de contraseñas más rápido del mundo. Soporta 300+ tipos de hash. Usa GPU para aceleración. Modos: dictionary, brute force, combinator, rule-based. Esencial para post-explotación.</div>
+      <div class="tool-cmd">hashcat -m 1000 -a 0 hashes.txt rockyou.txt --show</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-header">
+        <div class="tool-icon" style="background:#2a2a1a">🐍</div>
+        <div><div class="tool-name">sqlmap</div><div class="tool-phase">Fase 3 → Web</div></div>
+      </div>
+      <div class="tool-desc">Automatiza detección y explotación de SQL Injection. Soporta todos los tipos de SQLi: error-based, UNION, blind, time-based. Puede extraer DBs, tablas, usuarios y hashes completos.</div>
+      <div class="tool-cmd">sqlmap -u "URL?id=1" --dbs --tables -D dbname --dump</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-header">
+        <div class="tool-icon" style="background:#1a1a1a">🔍</div>
+        <div><div class="tool-name">Wazuh SIEM</div><div class="tool-phase">Fase 2 → Blue Team</div></div>
+      </div>
+      <div class="tool-desc">SIEM/XDR open source. Recolecta logs de múltiples fuentes, aplica reglas de detección, genera alertas. Integra con OpenSearch (Elasticsearch) para dashboards. Gratuito y poderoso para home lab.</div>
+      <div class="tool-cmd">curl -sO https://packages.wazuh.com/4.7/wazuh-install.sh && bash</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-header">
+        <div class="tool-icon" style="background:#2a1a2a">🩸</div>
+        <div><div class="tool-name">BloodHound</div><div class="tool-phase">Fase 3 → Active Directory</div></div>
+      </div>
+      <div class="tool-desc">Visualiza rutas de ataque en Active Directory. Usa teoría de grafos para encontrar el camino más corto desde un usuario comprometido hasta Domain Admin. Integra con SharpHound (collector).</div>
+      <div class="tool-cmd">SharpHound.exe --CollectionMethods All → import en BloodHound</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-header">
+        <div class="tool-icon" style="background:#0a1a2a">☁️</div>
+        <div><div class="tool-name">Azure CLI + Portal</div><div class="tool-phase">Fase 4 → Cloud Security</div></div>
+      </div>
+      <div class="tool-desc">Interfaz de línea de comandos para gestionar recursos Azure. Permite scripting, automatización y auditoría de seguridad. El portal es la GUI. Ambos son esenciales para Cloud Security Engineering.</div>
+      <div class="tool-cmd">az login && az security assessment list --query "[].{name:name}"</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-header">
+        <div class="tool-icon" style="background:#1a2a1a">📦</div>
+        <div><div class="tool-name">Trivy</div><div class="tool-phase">Fase 5 → DevSecOps</div></div>
+      </div>
+      <div class="tool-desc">Scanner de vulnerabilidades para contenedores, IaC (Terraform, CloudFormation), sistemas de archivos y repositorios Git. Detecta CVEs en dependencias, misconfigs y secrets expuestos.</div>
+      <div class="tool-cmd">trivy image nginx:latest --severity CRITICAL,HIGH --format json</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-header">
+        <div class="tool-icon" style="background:#2a2a2a">🔐</div>
+        <div><div class="tool-name">Volatility3</div><div class="tool-phase">Fase 2 → DFIR</div></div>
+      </div>
+      <div class="tool-desc">Análisis forense de memoria RAM. Extrae procesos, conexiones de red, handles, artefactos de malware desde un dump de memoria. Esencial para incident response y análisis de APTs.</div>
+      <div class="tool-cmd">vol3 -f mem.raw windows.pslist windows.netscan windows.malfind</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-header">
+        <div class="tool-icon" style="background:#1a1a2a">👣</div>
+        <div><div class="tool-name">theHarvester + Shodan</div><div class="tool-phase">Fase 3 → OSINT</div></div>
+      </div>
+      <div class="tool-desc">theHarvester: recolecta emails, subdominios, IPs desde fuentes públicas. Shodan: motor de búsqueda de dispositivos conectados a internet. Ambas son fundamentales en reconocimiento pasivo.</div>
+      <div class="tool-cmd">theHarvester -d target.com -b google,linkedin,shodan -f output</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ CERTS -->
+<div id="tab-certs" class="tab-pane">
+  <div class="section-title">Roadmap estratégico de certificaciones</div>
+  <div class="note">Las certificaciones son credenciales que abren puertas. El orden importa: empezar con las más accesibles te da confianza, preparación y dinero para las siguientes.</div>
+
+  <div class="cert-timeline">
+
+    <div class="cert-item">
+      <div class="cert-dot" style="background:var(--muted);border-color:var(--bg3)"></div>
+      <div class="cert-card">
+        <div class="cert-name">CompTIA Security+ SY0-701</div>
+        <div class="cert-meta">
+          <span class="cert-badge" style="background:var(--cyan-dim);color:var(--cyan)">Semana 22</span>
+          <span class="cert-badge" style="background:var(--bg4);color:var(--muted)">$381 USD</span>
+          <span class="cert-badge" style="background:var(--green-dim);color:var(--green)">Entry Level</span>
+        </div>
+        <div class="cert-why">La certificación más reconocida para entrar a ciberseguridad. Valida fundamentos: amenazas, arquitectura, implementación de controles, operaciones. Muchas empresas la requieren para SOC Analyst L1. Prepara con Professor Messer (gratis) + 200 practice questions.</div>
+      </div>
+    </div>
+
+    <div class="cert-item">
+      <div class="cert-dot" style="background:var(--orange);border-color:var(--bg3)"></div>
+      <div class="cert-card">
+        <div class="cert-name">eJPT — eLearnSecurity Junior Penetration Tester</div>
+        <div class="cert-meta">
+          <span class="cert-badge" style="background:var(--orange-dim);color:var(--orange)">Semana 31</span>
+          <span class="cert-badge" style="background:var(--bg4);color:var(--muted)">~$200 USD</span>
+          <span class="cert-badge" style="background:var(--green-dim);color:var(--green)">Práctica 100%</span>
+        </div>
+        <div class="cert-why">Examen práctico de 48 horas. Demuestras pentesting real en entorno virtualizado: enumeración, explotación, pivoting. Es la cert de pentesting más accesible y completamente práctica. Diferencia tu CV de otros candidatos.</div>
+      </div>
+    </div>
+
+    <div class="cert-item">
+      <div class="cert-dot" style="background:var(--amber);border-color:var(--bg3)"></div>
+      <div class="cert-card">
+        <div class="cert-name">Microsoft AZ-500: Azure Security Engineer Associate</div>
+        <div class="cert-meta">
+          <span class="cert-badge" style="background:var(--amber-dim);color:var(--amber)">Semana 39</span>
+          <span class="cert-badge" style="background:var(--bg4);color:var(--muted)">$165 USD</span>
+          <span class="cert-badge" style="background:var(--cyan-dim);color:var(--cyan)">Muy demandada</span>
+        </div>
+        <div class="cert-why">La certificación de cloud security más valorada en enterprise. Valida: gestión de identidades, protección de plataforma, seguridad de datos, gestión de operaciones de seguridad en Azure. Altamente demandada en empresas que usan Azure (la mayoría de enterprise).</div>
+      </div>
+    </div>
+
+    <div class="cert-item">
+      <div class="cert-dot" style="background:var(--amber);border-color:var(--bg3)"></div>
+      <div class="cert-card">
+        <div class="cert-name">Microsoft SC-200: Security Operations Analyst Associate</div>
+        <div class="cert-meta">
+          <span class="cert-badge" style="background:var(--amber-dim);color:var(--amber)">Semana 40</span>
+          <span class="cert-badge" style="background:var(--bg4);color:var(--muted)">$165 USD</span>
+          <span class="cert-badge" style="background:var(--purple-dim);color:var(--purple)">SOC / Blue Team</span>
+        </div>
+        <div class="cert-why">Complementa AZ-500 con foco en operaciones: Microsoft Defender suite, Azure Sentinel, KQL para threat hunting. Ideal para roles de SOC Analyst en entornos Microsoft. Combinada con AZ-500 te hace muy competitivo.</div>
+      </div>
+    </div>
+
+    <div class="cert-item">
+      <div class="cert-dot" style="background:var(--purple);border-color:var(--bg3)"></div>
+      <div class="cert-card">
+        <div class="cert-name">CEH — Certified Ethical Hacker v12 (Opcional post-empleo)</div>
+        <div class="cert-meta">
+          <span class="cert-badge" style="background:var(--purple-dim);color:var(--purple)">Post S48 (opcional)</span>
+          <span class="cert-badge" style="background:var(--bg4);color:var(--muted)">$950 USD</span>
+          <span class="cert-badge" style="background:var(--orange-dim);color:var(--orange)">Reconocimiento corporativo</span>
+        </div>
+        <div class="cert-why">Valorada en entornos corporativos y gubernamentales (especialmente LATAM y Middle East). Más teórica que práctica. Útil para contratos enterprise. No reemplaza OSCP en términos de skills reales, pero tiene más reconocimiento en algunas industrias.</div>
+      </div>
+    </div>
+
+    <div class="cert-item">
+      <div class="cert-dot" style="background:var(--red);border-color:var(--bg3)"></div>
+      <div class="cert-card">
+        <div class="cert-name">OSCP — Offensive Security Certified Professional (Objetivo 12–18 meses)</div>
+        <div class="cert-meta">
+          <span class="cert-badge" style="background:#ff475722);color:var(--red);border:1px solid var(--red)">12–18 meses post-inicio</span>
+          <span class="cert-badge" style="background:var(--bg4);color:var(--muted)">$1,499 USD</span>
+          <span class="cert-badge" style="background:var(--red)22;color:var(--red)">Gold Standard</span>
+        </div>
+        <div class="cert-why">El estándar de oro del pentesting. 24 horas de examen práctico en entorno real. Demuestra que puedes hackear sistemas sin herramientas automáticas. Exigida por las mejores empresas de pentesting del mundo. Objetivo a mediano plazo después de consolidar base.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ PROJECTS -->
+<div id="tab-projects" class="tab-pane">
+  <div class="section-title">Proyectos de portafolio — uno por fase</div>
+  <div class="note">Cada proyecto va a GitHub con README profesional. Son la diferencia entre un CV genérico y uno que consigue entrevistas. Los reclutadores técnicos los revisan.</div>
+
+  <div class="proj-grid">
+
+    <div class="proj-card">
+      <div class="proj-phase" style="color:var(--muted)">Fase 0 · Semana 4</div>
+      <div class="proj-title">net_recon.py — Network Recon Tool</div>
+      <div class="proj-desc">Script Python que hace ping, resolución DNS, consulta MX records, clasifica IPs como públicas/privadas y genera reporte JSON. Línea de comandos con argparse.</div>
+      <div class="proj-tech">
+        <span class="chip">Python</span><span class="chip">socket</span><span class="chip">subprocess</span><span class="chip">json</span>
+      </div>
+      <div class="proj-output">Repositorio GitHub con README, screenshots y ejemplos de uso</div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-phase" style="color:var(--green)">Fase 1 · Semana 10</div>
+      <div class="proj-title">Network Monitor Dashboard</div>
+      <div class="proj-desc">Combina port scanner multi-hilo, banner grabbing de servicios, análisis de versiones con CVE lookup via API NVD, y genera reporte HTML visual con gráficos.</div>
+      <div class="proj-tech">
+        <span class="chip green">Python</span><span class="chip green">threading</span><span class="chip green">requests</span><span class="chip green">NVD API</span>
+      </div>
+      <div class="proj-output">Dashboard HTML con top 10 servicios más vulnerables detectados</div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-phase" style="color:var(--cyan)">Fase 1 · Semana 14</div>
+      <div class="proj-title">Log Analyzer & Brute Force Detector</div>
+      <div class="proj-desc">Parsea auth.log y nginx access.log en tiempo real. Detecta patrones de brute force (umbral configurable). Genera alertas y exporta IoCs. Visualización con matplotlib.</div>
+      <div class="proj-tech">
+        <span class="chip cyan">Python</span><span class="chip cyan">regex</span><span class="chip cyan">matplotlib</span><span class="chip cyan">smtplib</span>
+      </div>
+      <div class="proj-output">Alertas en tiempo real + dashboard de actividad sospechosa</div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-phase" style="color:var(--cyan)">Fase 2 · Semana 21</div>
+      <div class="proj-title">Mini SOC — Home Security Operations Center</div>
+      <div class="proj-desc">Wazuh SIEM con agentes en múltiples VMs (Linux + Windows). Reglas personalizadas para detectar: brute force, SUID abuse, Mimikatz, PowerShell malicioso. Dashboards y alertas automáticas.</div>
+      <div class="proj-tech">
+        <span class="chip cyan">Wazuh</span><span class="chip cyan">OpenSearch</span><span class="chip cyan">Windows Server</span><span class="chip cyan">Ubuntu</span>
+      </div>
+      <div class="proj-output">SIEM funcionando con documentación de arquitectura y reglas</div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-phase" style="color:var(--orange)">Fase 3 · Semana 32</div>
+      <div class="proj-title">Pentest Report Completo — Metasploitable2</div>
+      <div class="proj-desc">Informe profesional de 15+ páginas: executive summary, metodología PTES, hallazgos clasificados por CVSS (Crítico/Alto/Medio/Bajo), evidencias, recomendaciones de remediación y anexo técnico.</div>
+      <div class="proj-tech">
+        <span class="chip orange">Nmap</span><span class="chip orange">Metasploit</span><span class="chip orange">Burp Suite</span><span class="chip orange">CVSS</span>
+      </div>
+      <div class="proj-output">PDF profesional de pentest — el más importante de tu portafolio</div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-phase" style="color:var(--amber)">Fase 4 · Semana 39</div>
+      <div class="proj-title">Azure Secure Architecture — IaC</div>
+      <div class="proj-desc">Arquitectura Azure completa deployada con Terraform: 3-tier app con VNets, NSGs, Azure Bastion, Key Vault, Managed Identity, Defender for Cloud y Sentinel integrado. Secure Score 80%+.</div>
+      <div class="proj-tech">
+        <span class="chip amber">Terraform</span><span class="chip amber">Azure</span><span class="chip amber">Sentinel</span><span class="chip amber">Checkov</span>
+      </div>
+      <div class="proj-output">Repositorio con Terraform + diagrama de arquitectura + Secure Score screenshot</div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-phase" style="color:var(--purple)">Fase 5 · Semana 41</div>
+      <div class="proj-title">DevSecOps Pipeline — Seguridad integrada en CI/CD</div>
+      <div class="proj-desc">Pipeline GitHub Actions completo: SAST (Bandit + Semgrep), SCA (Safety), Container scanning (Trivy), IaC scanning (Checkov), secrets detection (gitleaks). Breaking build on CRITICAL findings.</div>
+      <div class="proj-tech">
+        <span class="chip purple">GitHub Actions</span><span class="chip purple">Docker</span><span class="chip purple">Trivy</span><span class="chip purple">Terraform</span>
+      </div>
+      <div class="proj-output">Pipeline como código + README explicando cada herramienta y decisión</div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-phase" style="color:var(--purple)">Fase 5 · Semana 42</div>
+      <div class="proj-title">AI-Powered Log Analyzer</div>
+      <div class="proj-desc">Herramienta que usa LLM API para analizar logs sospechosos, clasificar eventos por severidad, sugerir reglas SIEM, enriquecer IoCs con contexto y generar reportes de incidentes automáticamente.</div>
+      <div class="proj-tech">
+        <span class="chip purple">Python</span><span class="chip purple">LLM API</span><span class="chip purple">Pandas</span><span class="chip purple">FastAPI</span>
+      </div>
+      <div class="proj-output">CLI tool + demo en video de 3 minutos + README con arquitectura</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ TIPS -->
+<div id="tab-tips" class="tab-pane">
+  <div class="section-title">Sistema de medición de progreso — checkpoints mensuales</div>
+  <div class="tool-grid" style="margin-bottom:28px">
+    <div class="tool-card">
+      <div class="tool-name" style="margin-bottom:10px;color:var(--cyan)">Mes 1–2 (Fase 0-1)</div>
+      <ul class="tip-list">
+        <li>Conviertes binario/hex sin calculadora</li>
+        <li>Navegas Linux CLI con fluidez completa</li>
+        <li>Explicas el TCP handshake a alguien</li>
+        <li>Tienes 3+ scripts Python funcionales en GitHub</li>
+        <li>Completaste 15+ rooms en TryHackMe</li>
+      </ul>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name" style="margin-bottom:10px;color:var(--green)">Mes 3–4 (Fase 1-2)</div>
+      <ul class="tip-list">
+        <li>Analizas cualquier captura Wireshark</li>
+        <li>Tienes SIEM Wazuh funcionando en casa</li>
+        <li>Aprobaste Security+ o estás en preparación final</li>
+        <li>Puedes hacer análisis forense básico (logs + memoria)</li>
+        <li>Completaste TryHackMe SOC Level 1</li>
+      </ul>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name" style="margin-bottom:10px;color:var(--orange)">Mes 5–7 (Fase 3)</div>
+      <ul class="tip-list">
+        <li>Resuelves máquinas HTB Easy sin walkthrough</li>
+        <li>Tienes reporte de pentest profesional en portafolio</li>
+        <li>Aprobaste eJPT</li>
+        <li>Entiendes y ejecutas: SQLi, XSS, LFI, RCE, PrivEsc</li>
+        <li>Participaste en al menos 1 CTF</li>
+      </ul>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name" style="margin-bottom:10px;color:var(--amber)">Mes 8–10 (Fase 4)</div>
+      <ul class="tip-list">
+        <li>Tienes certificación AZ-500 o SC-200</li>
+        <li>Deployaste arquitectura segura en Azure con Terraform</li>
+        <li>Configuras Sentinel con reglas personalizadas</li>
+        <li>Entiendes IAM, Zero Trust y CSPM en Azure</li>
+        <li>Secure Score >75% en tu suscripción de lab</li>
+      </ul>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name" style="margin-bottom:10px;color:var(--purple)">Mes 11–12 (Fase 5)</div>
+      <ul class="tip-list">
+        <li>Tienes portafolio GitHub con 8+ proyectos documentados</li>
+        <li>Publicaste 3+ artículos técnicos</li>
+        <li>Resuelves máquinas HTB Medium con regularidad</li>
+        <li>Tienes pipeline DevSecOps completo</li>
+        <li>Estás en proceso de entrevistas activas</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title">Errores comunes — evítalos activamente</div>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-title" style="color:var(--red)">❌ Errores que destruyen el progreso</div>
+      <ul class="tip-list">
+        <li><strong>Tutorial hell:</strong> Ver videos sin practicar. Regla: por cada 30 min de teoría, 90 min de práctica.</li>
+        <li><strong>Saltar fases:</strong> Querer hacer OSCP sin conocer Linux. Las fases tienen un orden por razón.</li>
+        <li><strong>No documentar:</strong> Hacer labs sin tomar notas. Usas Obsidian o Notion desde el día 1.</li>
+        <li><strong>Certificaciones sin práctica:</strong> Cert-dumping. Sin labs reales, las certs no sirven en entrevistas técnicas.</li>
+        <li><strong>Aislamiento:</strong> No unirse a comunidades. Discord de TryHackMe, HTB, r/netsec son recursos infinitos.</li>
+        <li><strong>Herramientas antes que conceptos:</strong> Usar Metasploit sin entender qué hace el exploit debajo.</li>
+      </ul>
+    </div>
+    <div class="tip-card">
+      <div class="tip-title" style="color:var(--green)">✅ Aceleradores de aprendizaje</div>
+      <ul class="tip-list">
+        <li><strong>Active recall:</strong> Después de cada sesión, cierra todo y escribe 5 cosas que aprendiste sin mirar.</li>
+        <li><strong>Enseña lo que aprendes:</strong> Escribir un blog post te obliga a entender de verdad.</li>
+        <li><strong>Build > watch:</strong> Construir tu propio scanner de 100 líneas > ver 10 videos sobre Nmap.</li>
+        <li><strong>Falla en público:</strong> CTFs, bug bounty sin experiencia. El fracaso controlado acelera el aprendizaje.</li>
+        <li><strong>Spaced repetition:</strong> Usar Anki para conceptos teóricos (CIDRs, event IDs, CVSSv3).</li>
+        <li><strong>Hackear tu propio sistema:</strong> Los mejores defensores piensan como atacantes. Siempre.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:28px">Cómo conseguir tu primer trabajo en ciberseguridad</div>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-title" style="color:var(--cyan)">🎯 Posiciones de entrada realistas (Mes 10–12)</div>
+      <ul class="tip-list">
+        <li><strong>SOC Analyst Tier 1:</strong> Monitoreo de alertas SIEM, triage de incidentes. Security+ + TryHackMe SOC Path es suficiente.</li>
+        <li><strong>Cloud Security Analyst:</strong> Gestión de postura en Azure/AWS. AZ-500 es muy valorada aquí.</li>
+        <li><strong>Junior Penetration Tester:</strong> Requiere eJPT mínimo + portafolio. Mejor con CEH o OSCP en progreso.</li>
+        <li><strong>Security Engineer (DevSecOps):</strong> Empresas tech que buscan integrar seguridad en pipelines. GitHub Actions + Terraform + coding skills.</li>
+        <li><strong>GRC/Compliance Analyst:</strong> Más fácil de entrar. ISO 27001, SOC 2. Valoran certificaciones.</li>
+      </ul>
+    </div>
+    <div class="tip-card">
+      <div class="tip-title" style="color:var(--amber)">💼 Estrategia de búsqueda activa</div>
+      <ul class="tip-list">
+        <li><strong>LinkedIn con keywords:</strong> "Cybersecurity", "Cloud Security", "SOC Analyst". Conectar con HR y managers directamente.</li>
+        <li><strong>GitHub visible:</strong> Cada proyecto con README en inglés y español. Los reclutadores buscan GitHub.</li>
+        <li><strong>Comunidades locales:</strong> OWASP chapter local, BSides conferences, meetups de seguridad.</li>
+        <li><strong>Hackerrank / Leetcode:</strong> Algunas empresas tienen pruebas técnicas de código. Python básico suficiente.</li>
+        <li><strong>Aplicar incluso sin 100% de requisitos:</strong> Si cumples 70%, aplica. Las JDs siempre son aspiracionales.</li>
+        <li><strong>Bug bounty como experiencia:</strong> "Identifiqué y reporté [tipo] en programa de bug bounty" en el CV.</li>
+      </ul>
+    </div>
+    <div class="tip-card">
+      <div class="tip-title" style="color:var(--purple)">🚀 Plan de 5 años post-empleo</div>
+      <ul class="tip-list">
+        <li><strong>Año 1:</strong> Consolidar en primer rol. Aprender de colegas. OSCP si es posible.</li>
+        <li><strong>Año 2:</strong> Especialización: Red Team Lead, Cloud Security Architect o DFIR Senior.</li>
+        <li><strong>Año 3:</strong> CISSP (requiere 5 años experiencia). Senior roles, $80-120k USD.</li>
+        <li><strong>Año 4-5:</strong> Principal/Lead Security Engineer, Security Architect, CISO junior. $120-180k+ USD.</li>
+        <li><strong>Alternativa:</strong> Freelance consulting, bug bounty full-time, pentesting firm propio.</li>
+      </ul>
+    </div>
+    <div class="tip-card">
+      <div class="tip-title" style="color:var(--orange)">⚡ Las 5 reglas de oro</div>
+      <ul class="tip-list">
+        <li><strong>Práctica todos los días:</strong> 2h/día durante 12 meses > 20h/semana por 3 meses. La consistencia gana.</li>
+        <li><strong>Lab propio es obligatorio:</strong> Sin hands-on en tu propio entorno, no hay progreso real.</li>
+        <li><strong>Documenta TODO:</strong> Obsidian para notas, GitHub para proyectos, blog para publicar.</li>
+        <li><strong>Busca mentores:</strong> LinkedIn outreach a profesionales seniors. El 20% responde. El 5% puede cambiar tu carrera.</li>
+        <li><strong>Ética antes que técnica:</strong> Nunca en sistemas sin autorización. La reputación lo es todo en esta industria.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note warn" style="margin-top:24px">⚠️ IMPORTANTE: Este material es únicamente para uso en entornos legalmente autorizados (tus propias VMs, plataformas de práctica como TryHackMe/HTB, y sistemas con permiso escrito explícito). El acceso no autorizado a sistemas ajenos es ilegal en todos los países.</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ RECURSOS -->
+<div id="tab-recursos" class="tab-pane">
+
+  <div class="note">🔗 Todos los links abren directamente el recurso. Los marcados <span class="badge-free">GRATIS</span> son 100% gratuitos. Los <span class="badge-paid">PAGO</span> son inversiones que valen la pena (muchos bajo $30 en oferta de Udemy).</div>
+
+  <!-- FILTROS -->
+  <div class="filter-bar" style="margin-top:16px">
+    <button class="filter-btn on" onclick="filterRes('all',this)">Todo</button>
+    <button class="filter-btn" onclick="filterRes('free',this)">Solo gratis</button>
+    <button class="filter-btn" onclick="filterRes('plat',this)">Plataformas práctica</button>
+    <button class="filter-btn" onclick="filterRes('course',this)">Cursos</button>
+    <button class="filter-btn" onclick="filterRes('ref',this)">Referencias técnicas</button>
+    <button class="filter-btn" onclick="filterRes('yt',this)">YouTube</button>
+    <button class="filter-btn" onclick="filterRes('tool',this)">Herramientas/Labs</button>
+  </div>
+
+  <!-- ── FASE 0–1: FUNDAMENTOS ── -->
+  <div class="res-section" data-cat="all">
+    <div class="res-section-title" style="color:var(--muted)">⬡ Fase 0–1 — Fundamentos: Linux, Redes & Python <span>Semanas 1–14</span></div>
+
+    <div class="res-cat-header">🖥 Linux & Sistema Operativo</div>
+    <div class="res-grid">
+      <div class="res-card" data-tags="free plat">
+        <div class="res-card-header">
+          <div class="res-card-title">Linux Journey — Tutorial interactivo</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Aprende Linux desde cero con ejercicios interactivos directamente en el navegador. Cubre: grasshopper, journeyman, networking, advanced. El mejor recurso gratuito para empezar con Linux.</div>
+        <a class="res-link" href="https://linuxjourney.com/" target="_blank">→ linuxjourney.com</a>
+      </div>
+      <div class="res-card" data-tags="free plat">
+        <div class="res-card-header">
+          <div class="res-card-title">OverTheWire: Bandit</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Wargame para aprender Linux CLI resolviendo retos reales vía SSH. 34 niveles que van desde ls/cat hasta comprensión de permisos, procesos y scripting básico. Imprescindible.</div>
+        <a class="res-link" href="https://overthewire.org/wargames/bandit/" target="_blank">→ overthewire.org/wargames/bandit</a>
+      </div>
+      <div class="res-card" data-tags="free course">
+        <div class="res-card-header">
+          <div class="res-card-title">The Linux Command Line (libro gratis)</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Libro completo de William Shotts, disponible gratis en PDF. Cubre: shell básico, manipulación de archivos, expansión, I/O redirection, scripting, regex. El libro definitivo de CLI.</div>
+        <a class="res-link" href="https://linuxcommand.org/tlcl.php" target="_blank">→ linuxcommand.org/tlcl.php</a>
+      </div>
+      <div class="res-card" data-tags="free course">
+        <div class="res-card-header">
+          <div class="res-card-title">TryHackMe — Linux Fundamentals 1, 2 & 3</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">3 rooms guiadas con máquinas virtuales en el navegador. Sin necesidad de instalar nada. Aprende la CLI en un entorno real y guiado. Perfecto como complemento a Linux Journey.</div>
+        <a class="res-link" href="https://tryhackme.com/module/linux-fundamentals" target="_blank">→ tryhackme.com/module/linux-fundamentals</a>
+      </div>
+    </div>
+
+    <div class="res-cat-header">🌐 Redes & Protocolos</div>
+    <div class="res-grid">
+      <div class="res-card" data-tags="free course">
+        <div class="res-card-header">
+          <div class="res-card-title">Professor Messer — CompTIA Network+ (N10-009)</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Curso de video completo para Network+. Cubre todos los conceptos de redes: OSI, TCP/IP, protocolos, subnetting, seguridad de redes. Videos en YouTube, muy bien explicados y estructurados.</div>
+        <a class="res-link" href="https://www.professormesser.com/network-plus/n10-009/n10-009-video/n10-009-training-course/" target="_blank">→ professormesser.com · Network+</a>
+      </div>
+      <div class="res-card" data-tags="free course">
+        <div class="res-card-header">
+          <div class="res-card-title">Cisco Skills for All — Networking Basics</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Curso introductorio de Cisco con certificado gratuito. Cubre: conceptos de red, protocolos, seguridad básica y fundamentos de administración. Ideal para principiantes absolutos.</div>
+        <a class="res-link" href="https://skillsforall.com/catalog?category=course" target="_blank">→ skillsforall.com</a>
+      </div>
+      <div class="res-card" data-tags="free ref">
+        <div class="res-card-header">
+          <div class="res-card-title">Subnetting Practice — subnetipv4.com</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Herramienta online para practicar subnetting con ejercicios aleatorios y feedback inmediato. También incluye VLSM y ejercicios de diseño de red. Practica 20 min/día durante 2 semanas.</div>
+        <a class="res-link" href="https://subnetipv4.com/" target="_blank">→ subnetipv4.com</a>
+      </div>
+      <div class="res-card" data-tags="free ref">
+        <div class="res-card-header">
+          <div class="res-card-title">Wireshark Sample Captures</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Wiki oficial de Wireshark con capturas de paquetes reales para practicar análisis. Hay capturas de HTTP, DNS, TLS, malware, VoIP, Wi-Fi y más. Esencial para aprender análisis de tráfico.</div>
+        <a class="res-link" href="https://wiki.wireshark.org/SampleCaptures" target="_blank">→ wiki.wireshark.org/SampleCaptures</a>
+      </div>
+      <div class="res-card" data-tags="free ref">
+        <div class="res-card-header">
+          <div class="res-card-title">Malware Traffic Analysis — PCAP reales</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Repositorio de capturas PCAP de tráfico de malware real para análisis forense de red. Incluye ejercicios con soluciones. Fundamental para prepararse para roles de SOC/DFIR.</div>
+        <a class="res-link" href="https://malware-traffic-analysis.net/" target="_blank">→ malware-traffic-analysis.net</a>
+      </div>
+    </div>
+
+    <div class="res-cat-header">🐍 Python para Ciberseguridad</div>
+    <div class="res-grid">
+      <div class="res-card" data-tags="free course">
+        <div class="res-card-header">
+          <div class="res-card-title">Automate the Boring Stuff with Python</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">El mejor libro para aprender Python de forma práctica. Disponible gratis online. Capítulos sobre: archivos, regex, web scraping, Excel/PDF automation. Base perfecta antes de pasar a scripting de seguridad.</div>
+        <a class="res-link" href="https://automatetheboringstuff.com/" target="_blank">→ automatetheboringstuff.com</a>
+      </div>
+      <div class="res-card" data-tags="free ref">
+        <div class="res-card-header">
+          <div class="res-card-title">Python Docs — Tutorial oficial</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Tutorial oficial de Python. La referencia definitiva. Cubre desde conceptos básicos hasta módulos avanzados. Cuando tengas dudas sobre sintaxis o módulos, aquí primero.</div>
+        <a class="res-link" href="https://docs.python.org/3/tutorial/" target="_blank">→ docs.python.org/3/tutorial</a>
+      </div>
+      <div class="res-card" data-tags="paid course">
+        <div class="res-card-header">
+          <div class="res-card-title">Python for Pentesters — TCM Security</div>
+          <div class="res-badges"><span class="badge-paid">~$30</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Curso de Heath Adams ("The Cyber Mentor") enfocado en scripting Python para ciberseguridad: port scanners, brute forcers, exploit scripts. El más práctico del mercado para este tema.</div>
+        <a class="res-link" href="https://academy.tcm-sec.com/p/python-101-for-hackers" target="_blank">→ academy.tcm-sec.com</a>
+      </div>
+      <div class="res-card" data-tags="free ref">
+        <div class="res-card-header">
+          <div class="res-card-title">Scapy Documentation</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Documentación oficial de Scapy, la librería de Python para manipulación de paquetes de red. Con ejemplos para crafting de paquetes, sniffing, ARP spoofing y más.</div>
+        <a class="res-link" href="https://scapy.readthedocs.io/en/latest/" target="_blank">→ scapy.readthedocs.io</a>
+      </div>
+    </div>
+
+    <div class="res-cat-header">🎯 Plataformas de práctica — Fase 0–1</div>
+    <div class="res-grid">
+      <div class="res-card" data-tags="free plat">
+        <div class="res-card-header">
+          <div class="res-card-title">TryHackMe — Pre-Security Path</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Ruta de 40h para principiantes absolutos. Cubre: cómo funciona la web, redes, sistemas operativos, cómo funciona Linux. Todo en el navegador con máquinas virtuales incluidas. Empieza aquí.</div>
+        <a class="res-link" href="https://tryhackme.com/path/outline/presecurity" target="_blank">→ tryhackme.com/path/outline/presecurity</a>
+      </div>
+      <div class="res-card" data-tags="free plat">
+        <div class="res-card-header">
+          <div class="res-card-title">PicoCTF — CTF para principiantes</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">CTF permanente del Carnegie Mellon University. Retos de: criptografía, forense, web, reversing y general skills. Perfecto para principiantes. Empieza con los retos de nivel "picoGym".</div>
+        <a class="res-link" href="https://picoctf.org/" target="_blank">→ picoctf.org</a>
+      </div>
+      <div class="res-card" data-tags="free plat">
+        <div class="res-card-header">
+          <div class="res-card-title">CS50x — Intro to Computer Science (Harvard)</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">El curso de ciencias computacionales más popular del mundo. Gratis en edX. Opcional pero muy valioso para entender cómo funcionan las computadoras desde adentro: memoria, punteros, compilación.</div>
+        <a class="res-link" href="https://cs50.harvard.edu/x/" target="_blank">→ cs50.harvard.edu/x</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FASE 2: BLUE TEAM ── -->
+  <div class="res-section">
+    <div class="res-section-title" style="color:var(--cyan)">⬡ Fase 2 — Ciberseguridad + Blue Team <span>Semanas 15–22</span></div>
+
+    <div class="res-cat-header">🔵 Blue Team & SOC</div>
+    <div class="res-grid">
+      <div class="res-card" data-tags="free plat">
+        <div class="res-card-header">
+          <div class="res-card-title">TryHackMe — SOC Level 1 Path</div>
+          <div class="res-badges"><span class="badge-free">GRATIS*</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Ruta de 60h para analistas de SOC. Cubre: phishing, SIEM, threat intelligence, endpoint security, DFIR, triage de alertas. Algunos rooms requieren suscripción (~$14/mes). Vale cada peso.</div>
+        <a class="res-link" href="https://tryhackme.com/path/outline/soclevel1" target="_blank">→ tryhackme.com/path/outline/soclevel1</a>
+      </div>
+      <div class="res-card" data-tags="free plat">
+        <div class="res-card-header">
+          <div class="res-card-title">BlueTeamLabs.online</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Plataforma con desafíos reales de Blue Team: análisis de malware, forense, phishing, threat hunting. Interfaz similar a un entorno SOC real. Retos con niveles beginner→hard.</div>
+        <a class="res-link" href="https://blueteamlabs.online/" target="_blank">→ blueteamlabs.online</a>
+      </div>
+      <div class="res-card" data-tags="free plat">
+        <div class="res-card-header">
+          <div class="res-card-title">CyberDefenders — Blue Team CTF</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Desafíos de respuesta a incidentes con archivos reales: PCAPes, memoria RAM, imágenes de disco. Incluye writeups. Muy valorado por reclutadores de DFIR y SOC. Empieza con "Hammered" (beginner).</div>
+        <a class="res-link" href="https://cyberdefenders.org/" target="_blank">→ cyberdefenders.org</a>
+      </div>
+      <div class="res-card" data-tags="free plat">
+        <div class="res-card-header">
+          <div class="res-card-title">LetsDefend — SOC training interactivo</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Simula un entorno SOC real: recibes alertas, investigas, cierras casos. Incluye SIEM, sandbox, threat intel. Plan gratuito tiene bastante contenido. Ideal para entender el día a día de un SOC Analyst.</div>
+        <a class="res-link" href="https://letsdefend.io/" target="_blank">→ letsdefend.io</a>
+      </div>
+      <div class="res-card" data-tags="free ref">
+        <div class="res-card-header">
+          <div class="res-card-title">MITRE ATT&CK Framework</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">La base de conocimiento de tácticas y técnicas de adversarios más usada en la industria. Imprescindible para threat hunting, detección y respuesta a incidentes. Aprende a navegar antes de Fase 2.</div>
+        <a class="res-link" href="https://attack.mitre.org/" target="_blank">→ attack.mitre.org</a>
+      </div>
+      <div class="res-card" data-tags="free ref">
+        <div class="res-card-header">
+          <div class="res-card-title">MITRE ATT&CK Navigator</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Herramienta web para visualizar y anotar la matriz ATT&CK. Crear heat maps de cobertura defensiva, mapear TTPs de grupos APT, comparar técnicas. Usado en reportes profesionales de threat intel.</div>
+        <a class="res-link" href="https://mitre-attack.github.io/attack-navigator/" target="_blank">→ mitre-attack.github.io/attack-navigator</a>
+      </div>
+    </div>
+
+    <div class="res-cat-header">🔍 Análisis de Malware & Forense</div>
+    <div class="res-grid">
+      <div class="res-card" data-tags="free tool">
+        <div class="res-card-header">
+          <div class="res-card-title">any.run — Sandbox interactivo</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Sandbox en la nube para analizar malware en tiempo real e interactuar con él. Ver procesos creados, conexiones de red, cambios en registro y disco. Plan free: 3 análisis/día. Imprescindible.</div>
+        <a class="res-link" href="https://app.any.run/" target="_blank">→ app.any.run</a>
+      </div>
+      <div class="res-card" data-tags="free tool">
+        <div class="res-card-header">
+          <div class="res-card-title">VirusTotal</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Analiza archivos, URLs, IPs y dominios contra 70+ motores antivirus. También muestra comportamiento, relaciones entre muestras e información de threat intelligence. Herramienta diaria de cualquier analista.</div>
+        <a class="res-link" href="https://virustotal.com/" target="_blank">→ virustotal.com</a>
+      </div>
+      <div class="res-card" data-tags="free tool">
+        <div class="res-card-header">
+          <div class="res-card-title">Hybrid Analysis — Sandbox gratuito</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Sandbox gratuito de CrowdStrike. Analiza archivos con múltiples motores de AV + análisis de comportamiento detallado. Informes con IoCs exportables en MISP/STIX. Buena alternativa a any.run.</div>
+        <a class="res-link" href="https://www.hybrid-analysis.com/" target="_blank">→ hybrid-analysis.com</a>
+      </div>
+      <div class="res-card" data-tags="free tool">
+        <div class="res-card-header">
+          <div class="res-card-title">Wazuh — SIEM/XDR Open Source</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">El SIEM open source más completo. Documentación excelente con guías paso a paso de instalación y configuración. Para el home lab es la opción #1. Integra con OpenSearch/Elastic.</div>
+        <a class="res-link" href="https://documentation.wazuh.com/current/installation-guide/index.html" target="_blank">→ documentation.wazuh.com</a>
+      </div>
+    </div>
+
+    <div class="res-cat-header">📜 Security+ — Recursos de preparación</div>
+    <div class="res-grid">
+      <div class="res-card" data-tags="free course">
+        <div class="res-card-header">
+          <div class="res-card-title">Professor Messer — Security+ SY0-701 (GRATIS)</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Videos completos del examen SY0-701 completamente gratis en su web. La mejor preparación gratuita disponible. Cubre todos los dominios. Complementa con sus practice exams ($15/set). Empieza aquí.</div>
+        <a class="res-link" href="https://www.professormesser.com/security-plus/sy0-701/sy0-701-video/sy0-701-comptia-security-plus-course/" target="_blank">→ professormesser.com · Security+</a>
+      </div>
+      <div class="res-card" data-tags="paid course">
+        <div class="res-card-header">
+          <div class="res-card-title">Jason Dion — Security+ SY0-701 (Udemy)</div>
+          <div class="res-badges"><span class="badge-paid">~$15 Udemy</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Curso + 6 exámenes de práctica (900 preguntas). Los practice exams son los más cercanos al examen real. Espera la oferta de Udemy (cada semana baja a $12-15). Los practice exams solos valen el precio.</div>
+        <a class="res-link" href="https://www.udemy.com/course/securityplus/" target="_blank">→ udemy.com · Jason Dion Security+</a>
+      </div>
+      <div class="res-card" data-tags="free ref">
+        <div class="res-card-header">
+          <div class="res-card-title">CompTIA CertMaster Learn (oficial)</div>
+          <div class="res-badges"><span class="badge-paid">$239 oficial</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Material oficial de CompTIA. Más caro pero el más alineado al examen. Si tienes presupuesto y quieres garantía de cobertura total, es la opción más segura. Incluye performance-based questions.</div>
+        <a class="res-link" href="https://www.comptia.org/training/certmaster-learn/security" target="_blank">→ comptia.org/training/certmaster-learn/security</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FASE 3: RED TEAM ── -->
+  <div class="res-section">
+    <div class="res-section-title" style="color:var(--orange)">⬡ Fase 3 — Red Team & Pentesting <span>Semanas 23–32</span></div>
+
+    <div class="res-cat-header">🎯 Plataformas de Hacking Práctico</div>
+    <div class="res-grid">
+      <div class="res-card" data-tags="free plat">
+        <div class="res-card-header">
+          <div class="res-card-title">TryHackMe — Jr Pentester Path</div>
+          <div class="res-badges"><span class="badge-free">Parcial gratis</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Ruta de 56h para pentesting. Cubre: metasploit, burp suite, web hacking, network exploitation, privesc, Active Directory. La ruta más estructurada para iniciarse en pentesting.</div>
+        <a class="res-link" href="https://tryhackme.com/path/outline/jrpenetrationtester" target="_blank">→ tryhackme.com/path/outline/jrpenetrationtester</a>
+      </div>
+      <div class="res-card" data-tags="free plat">
+        <div class="res-card-header">
+          <div class="res-card-title">Hack The Box — Starting Point</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">El estándar de la industria para hacking práctico. Starting Point son máquinas guiadas perfectas para empezar. Después pasa a máquinas Easy. El tier gratuito tiene bastante contenido para empezar.</div>
+        <a class="res-link" href="https://app.hackthebox.com/starting-point" target="_blank">→ app.hackthebox.com/starting-point</a>
+      </div>
+      <div class="res-card" data-tags="free plat">
+        <div class="res-card-header">
+          <div class="res-card-title">PortSwigger Web Security Academy ⭐</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">El mejor recurso GRATUITO para web hacking. Creado por los mismos de Burp Suite. Cubre todos los temas: SQLi, XSS, CSRF, SSRF, XXE, IDOR, authentication, JWT, OAuth, deserialization. Labs prácticos para cada tema.</div>
+        <a class="res-link" href="https://portswigger.net/web-security" target="_blank">→ portswigger.net/web-security</a>
+      </div>
+      <div class="res-card" data-tags="free plat">
+        <div class="res-card-header">
+          <div class="res-card-title">VulnHub — VMs vulnerables gratuitas</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Colección de máquinas virtuales intencionalmente vulnerables para descargar y practicar offline. Cientos de máquinas de todos los niveles. Perfectas cuando no tienes internet estable.</div>
+        <a class="res-link" href="https://vulnhub.com/" target="_blank">→ vulnhub.com</a>
+      </div>
+      <div class="res-card" data-tags="free plat">
+        <div class="res-card-header">
+          <div class="res-card-title">PentesterLab — Web App Pentesting</div>
+          <div class="res-badges"><span class="badge-free">Gratis + Pro $20/mes</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Ejercicios de pentesting web muy bien estructurados. Empieza gratis con los de introducción. El plan Pro ($20/mes) es de los mejores para preparar OSCP web components. Badges verificables en LinkedIn.</div>
+        <a class="res-link" href="https://pentesterlab.com/" target="_blank">→ pentesterlab.com</a>
+      </div>
+      <div class="res-card" data-tags="free plat">
+        <div class="res-card-header">
+          <div class="res-card-title">CTFtime — Calendario de CTFs</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Calendario global de Capture The Flag competitions. Filtra por nivel y tipo. Participa en CTFs de equipos incluso siendo principiante, aprendes muchísimo en 48h de competencia. Registra tu equipo.</div>
+        <a class="res-link" href="https://ctftime.org/" target="_blank">→ ctftime.org</a>
+      </div>
+    </div>
+
+    <div class="res-cat-header">📖 Referencias y cursos de Pentesting</div>
+    <div class="res-grid">
+      <div class="res-card" data-tags="free ref">
+        <div class="res-card-header">
+          <div class="res-card-title">HackTricks — Referencia técnica ⭐</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">La enciclopedia del pentesting. Técnicas, herramientas, cheatsheets para cada fase de un pentest: reconocimiento, explotación, post-explotación, evasión, AD attacks. Tu referencia #1 durante Fase 3 y 4.</div>
+        <a class="res-link" href="https://book.hacktricks.xyz/" target="_blank">→ book.hacktricks.xyz</a>
+      </div>
+      <div class="res-card" data-tags="free ref">
+        <div class="res-card-header">
+          <div class="res-card-title">GTFOBins — Privilege Escalation Linux</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Curated list of Unix binaries que pueden usarse para escalar privilegios, escapar de shells restringidas, etc. Búsqueda por binario: ej. "find" te muestra cómo usarlo para privesc. Imprescindible.</div>
+        <a class="res-link" href="https://gtfobins.github.io/" target="_blank">→ gtfobins.github.io</a>
+      </div>
+      <div class="res-card" data-tags="free ref">
+        <div class="res-card-header">
+          <div class="res-card-title">LOLBAS — Living Off The Land (Windows)</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Equivalente de GTFOBins para Windows. Binarios legítimos de Windows (certutil, regsvr32, mshta) usados para ejecución de código, descarga de payloads y evasión de AV.</div>
+        <a class="res-link" href="https://lolbas-project.github.io/" target="_blank">→ lolbas-project.github.io</a>
+      </div>
+      <div class="res-card" data-tags="free ref">
+        <div class="res-card-header">
+          <div class="res-card-title">Exploit-DB — Base de datos de exploits</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Archivo de exploits públicos mantenido por Offensive Security. searchsploit (CLI) busca localmente. Útil para encontrar exploits de versiones específicas durante reconocimiento. Úsalo con searchsploit en Kali.</div>
+        <a class="res-link" href="https://www.exploit-db.com/" target="_blank">→ exploit-db.com</a>
+      </div>
+      <div class="res-card" data-tags="paid course">
+        <div class="res-card-header">
+          <div class="res-card-title">Practical Ethical Hacking — TCM Security ⭐</div>
+          <div class="res-badges"><span class="badge-paid">~$30</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">El mejor curso de pentesting relación calidad-precio. Heath Adams cubre todo: reconocimiento, explotación, AD attacks, post-explotación, reporting. 25h de contenido. Equivalente a bootcamps de $3000.</div>
+        <a class="res-link" href="https://academy.tcm-sec.com/p/practical-ethical-hacking-the-complete-course" target="_blank">→ academy.tcm-sec.com · PEH</a>
+      </div>
+      <div class="res-card" data-tags="free plat">
+        <div class="res-card-header">
+          <div class="res-card-title">INE Starter Pass — eJPT gratis</div>
+          <div class="res-badges"><span class="badge-free">GRATIS (starter)</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">INE ofrece un Starter Pass gratuito con acceso a cursos base de seguridad incluyendo el material preparatorio para eJPT. Suficiente para preparar el examen junto con TryHackMe Jr Pentester.</div>
+        <a class="res-link" href="https://my.ine.com/path/a223968e-3a74-45ed-884d-2d16760b8bbd" target="_blank">→ my.ine.com · eJPT Prep</a>
+      </div>
+    </div>
+
+    <div class="res-cat-header">🩸 Active Directory</div>
+    <div class="res-grid">
+      <div class="res-card" data-tags="free plat">
+        <div class="res-card-header">
+          <div class="res-card-title">TryHackMe — Attacking Active Directory</div>
+          <div class="res-badges"><span class="badge-free">Parcial gratis</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Rooms específicas para ataques a AD: Kerberoasting, Pass-the-Hash, BloodHound, GPO abuse. Entorno pre-configurado, sin necesidad de montar tu propio lab de AD desde cero.</div>
+        <a class="res-link" href="https://tryhackme.com/module/hacking-active-directory" target="_blank">→ tryhackme.com · Active Directory module</a>
+      </div>
+      <div class="res-card" data-tags="free ref">
+        <div class="res-card-header">
+          <div class="res-card-title">BloodHound CE — Documentación</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Documentación oficial de BloodHound Community Edition. Guías de instalación, queries Cypher para encontrar rutas de ataque, integración con SharpHound. GitHub con releases y wiki.</div>
+        <a class="res-link" href="https://support.bloodhoundenterprise.io/hc/en-us/articles/17468450058267-BloodHound-Community-Edition-Data-Collection" target="_blank">→ BloodHound CE Docs</a>
+      </div>
+      <div class="res-card" data-tags="free plat">
+        <div class="res-card-header">
+          <div class="res-card-title">VulnAD — Lab de AD vulnerable</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Scripts de PowerShell que crean automáticamente un dominio Windows con múltiples vulnerabilidades de AD para practicar ataques. Se instala en tu VM de Windows Server. Ideal para práctica offline.</div>
+        <a class="res-link" href="https://github.com/WazeHell/vulnerable-AD" target="_blank">→ github.com/WazeHell/vulnerable-AD</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FASE 4: AZURE ── -->
+  <div class="res-section">
+    <div class="res-section-title" style="color:var(--amber)">⬡ Fase 4 — Cloud Security Azure <span>Semanas 33–40</span></div>
+
+    <div class="res-cat-header">☁️ Azure — Aprendizaje oficial y gratuito</div>
+    <div class="res-grid">
+      <div class="res-card" data-tags="free course">
+        <div class="res-card-header">
+          <div class="res-card-title">Microsoft Learn — Ruta completa AZ-500 ⭐</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">La ruta de aprendizaje oficial de Microsoft para AZ-500. Módulos interactivos con sandboxes en Azure incluidos (sin necesidad de cuenta propia). Cubre todos los dominios del examen. Empieza aquí.</div>
+        <a class="res-link" href="https://learn.microsoft.com/en-us/credentials/certifications/azure-security-engineer/" target="_blank">→ learn.microsoft.com · AZ-500</a>
+      </div>
+      <div class="res-card" data-tags="free course">
+        <div class="res-card-header">
+          <div class="res-card-title">Microsoft Learn — Ruta SC-200</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Ruta oficial para SC-200 Security Operations Analyst. Cubre Microsoft Sentinel, Defender suite, KQL para threat hunting. Incluye ejercicios con KQL en Azure Sentinel de práctica.</div>
+        <a class="res-link" href="https://learn.microsoft.com/en-us/credentials/certifications/security-operations-analyst/" target="_blank">→ learn.microsoft.com · SC-200</a>
+      </div>
+      <div class="res-card" data-tags="free course">
+        <div class="res-card-header">
+          <div class="res-card-title">John Savill — Azure Master Class (YouTube) ⭐</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Series completas de Azure en YouTube: AZ-104, AZ-305, AZ-500. Las mejores explicaciones técnicas de Azure disponibles en video. Su "Azure Master Class" de 10h es obligatoria para entender Azure de fondo.</div>
+        <a class="res-link" href="https://www.youtube.com/@NTFAQGuy" target="_blank">→ youtube.com/@NTFAQGuy</a>
+      </div>
+      <div class="res-card" data-tags="free tool">
+        <div class="res-card-header">
+          <div class="res-card-title">Azure Free Account — $200 crédito</div>
+          <div class="res-badges"><span class="badge-free">GRATIS (12 meses)</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">$200 de crédito por 30 días + servicios gratuitos por 12 meses + siempre gratis (25+ servicios). Suficiente para todo el lab de Fase 4. Necesitas tarjeta de crédito para verificación (no se cobra).</div>
+        <a class="res-link" href="https://azure.microsoft.com/en-us/free/" target="_blank">→ azure.microsoft.com/free</a>
+      </div>
+      <div class="res-card" data-tags="free ref">
+        <div class="res-card-header">
+          <div class="res-card-title">Microsoft Sentinel Ninja Training</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Programa de entrenamiento oficial de Microsoft para convertirse en experto de Sentinel. Niveles L100-L400. Incluye KQL, playbooks, reglas analíticas, hunting queries. Muy valorado en entrevistas.</div>
+        <a class="res-link" href="https://techcommunity.microsoft.com/blog/microsoftsentinelblog/become-a-microsoft-sentinel-ninja-the-complete-level-400-training-program/1246310" target="_blank">→ Sentinel Ninja Training Blog</a>
+      </div>
+      <div class="res-card" data-tags="paid course">
+        <div class="res-card-header">
+          <div class="res-card-title">AZ-500 por Skylines Academy (Udemy)</div>
+          <div class="res-badges"><span class="badge-paid">~$15 Udemy</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Curso de AZ-500 muy completo con demos en Azure Portal. Incluye practice exams. Alternativa a Microsoft Learn cuando quieres más explicación visual y demos en vivo. Compra en oferta de Udemy.</div>
+        <a class="res-link" href="https://www.udemy.com/course/az500-azure-security/" target="_blank">→ udemy.com · AZ-500 Skylines</a>
+      </div>
+    </div>
+
+    <div class="res-cat-header">🔐 Cloud Security — Referencias y herramientas</div>
+    <div class="res-grid">
+      <div class="res-card" data-tags="free ref">
+        <div class="res-card-header">
+          <div class="res-card-title">CloudSecDocs — Azure Security cheatsheets</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Referencia de seguridad cloud con cheatsheets para Azure, AWS y GCP. Cubre: IAM, red, storage, logging, compliance. Muy útil como referencia rápida durante el estudio de AZ-500.</div>
+        <a class="res-link" href="https://cloudsecdocs.com/" target="_blank">→ cloudsecdocs.com</a>
+      </div>
+      <div class="res-card" data-tags="free ref">
+        <div class="res-card-header">
+          <div class="res-card-title">Microsoft Defender for Cloud — Docs</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Documentación oficial de Defender for Cloud. Guías para habilitar, configurar Secure Score, integrar workloads. La documentación de Microsoft es excepcionalmente buena, léela directamente.</div>
+        <a class="res-link" href="https://learn.microsoft.com/en-us/azure/defender-for-cloud/" target="_blank">→ learn.microsoft.com · Defender for Cloud</a>
+      </div>
+      <div class="res-card" data-tags="free tool">
+        <div class="res-card-header">
+          <div class="res-card-title">ROADtools — Azure AD enumeration</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Toolkit para enumerar y analizar Azure AD desde perspectiva de atacante/auditor. Útil para entender qué información es visible y qué puede explotar un adversario con credenciales comprometidas.</div>
+        <a class="res-link" href="https://github.com/dirkjanm/ROADtools" target="_blank">→ github.com/dirkjanm/ROADtools</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FASE 5: DEVSECOPS ── -->
+  <div class="res-section">
+    <div class="res-section-title" style="color:var(--purple)">⬡ Fase 5 — DevSecOps, API & Empleabilidad <span>Semanas 41–48</span></div>
+
+    <div class="res-cat-header">🔧 DevSecOps</div>
+    <div class="res-grid">
+      <div class="res-card" data-tags="free ref">
+        <div class="res-card-header">
+          <div class="res-card-title">OWASP DevSecOps Guideline</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Guía completa de OWASP para integrar seguridad en pipelines CI/CD. Cubre: threat modeling, SAST/DAST/SCA, container security, secrets management. La referencia para DevSecOps Engineers.</div>
+        <a class="res-link" href="https://owasp.org/www-project-devsecops-guideline/" target="_blank">→ owasp.org · DevSecOps Guideline</a>
+      </div>
+      <div class="res-card" data-tags="free course">
+        <div class="res-card-header">
+          <div class="res-card-title">Snyk Learn — DevSecOps interactivo</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Lecciones interactivas sobre vulnerabilidades en código, containers y dependencias. Aprende con código real: SQL injection en Python, misconfigs en Terraform, vulnerabilidades en npm packages.</div>
+        <a class="res-link" href="https://learn.snyk.io/" target="_blank">→ learn.snyk.io</a>
+      </div>
+      <div class="res-card" data-tags="free ref">
+        <div class="res-card-header">
+          <div class="res-card-title">OWASP API Security Top 10</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Lista OWASP de las 10 vulnerabilidades más críticas en APIs REST y GraphQL. Incluye ejemplos de código vulnerable, cómo explotar y cómo mitigar. La referencia para API Security testing.</div>
+        <a class="res-link" href="https://owasp.org/www-project-api-security/" target="_blank">→ owasp.org · API Security Top 10</a>
+      </div>
+      <div class="res-card" data-tags="free plat">
+        <div class="res-card-header">
+          <div class="res-card-title">crAPI — Vulnerable API para práctica</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Completely Ridiculous API — aplicación vulnerable diseñada por OWASP para practicar los 10 riesgos de la API Security Top 10. Deploy con Docker en 5 minutos. Incluye guía de challenges.</div>
+        <a class="res-link" href="https://github.com/OWASP/crAPI" target="_blank">→ github.com/OWASP/crAPI</a>
+      </div>
+    </div>
+
+    <div class="res-cat-header">💼 Bug Bounty & Carrera</div>
+    <div class="res-grid">
+      <div class="res-card" data-tags="free plat">
+        <div class="res-card-header">
+          <div class="res-card-title">HackerOne — Bug Bounty Programs</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">La plataforma de bug bounty más grande. Crea perfil, busca programas con scope amplio (ej. scope: *.domain.com), empieza con programas con bounty bajo para aprender la metodología real.</div>
+        <a class="res-link" href="https://hackerone.com/opportunities/all/search" target="_blank">→ hackerone.com/opportunities</a>
+      </div>
+      <div class="res-card" data-tags="free plat">
+        <div class="res-card-header">
+          <div class="res-card-title">Bugcrowd — Bug Bounty Platform</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Segunda plataforma más grande de bug bounty. Tiene un University program con retos educativos. Algunos programas tienen muy buena comunicación con triagers, ideal para principiantes.</div>
+        <a class="res-link" href="https://bugcrowd.com/engagements" target="_blank">→ bugcrowd.com/engagements</a>
+      </div>
+      <div class="res-card" data-tags="free ref">
+        <div class="res-card-header">
+          <div class="res-card-title">Simply Cyber — Career Advice (YouTube)</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Canal de Gerald Auger sobre carrera en ciberseguridad: cómo conseguir el primer trabajo, preparar CV, entrevistas, certificaciones que realmente importan. El mejor canal de consejos de carrera del sector.</div>
+        <a class="res-link" href="https://www.youtube.com/@SimplyCyber" target="_blank">→ youtube.com/@SimplyCyber</a>
+      </div>
+      <div class="res-card" data-tags="free ref">
+        <div class="res-card-header">
+          <div class="res-card-title">CyberSeek — Mapa del mercado laboral</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span><span class="badge-en">EN</span></div>
+        </div>
+        <div class="res-card-desc">Herramienta del NIST para visualizar el mercado laboral de ciberseguridad: demanda de roles, salarios, skills más buscados, certificaciones más valoradas por empleadores. Basado en datos reales de ofertas laborales.</div>
+        <a class="res-link" href="https://www.cyberseek.org/pathway.html" target="_blank">→ cyberseek.org/pathway.html</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── YOUTUBE CHANNELS ── -->
+  <div class="res-section">
+    <div class="res-section-title">📺 Canales de YouTube imprescindibles</div>
+    <div class="yt-grid">
+      <div class="yt-card" data-tags="free yt">
+        <div class="yt-icon">▶</div>
+        <div>
+          <div class="yt-name"><a href="https://youtube.com/@_JohnHammond" target="_blank">John Hammond</a></div>
+          <div class="yt-desc">CTF walkthroughs, malware analysis, hacking tools. El mejor para aprender resolviendo problemas reales.</div>
+        </div>
+      </div>
+      <div class="yt-card" data-tags="free yt">
+        <div class="yt-icon">▶</div>
+        <div>
+          <div class="yt-name"><a href="https://youtube.com/@TCMSecurityAcademy" target="_blank">TCM Security (The Cyber Mentor)</a></div>
+          <div class="yt-desc">Heath Adams: pentesting, AD attacks, Python. Cursos completos en YouTube gratis. El mejor canal de hacking práctico.</div>
+        </div>
+      </div>
+      <div class="yt-card" data-tags="free yt">
+        <div class="yt-icon">▶</div>
+        <div>
+          <div class="yt-name"><a href="https://youtube.com/@ippsec" target="_blank">IppSec</a></div>
+          <div class="yt-desc">Walkthroughs de máquinas HTB. Ver cómo piensa un experto resolviendo máquinas. Ver DESPUÉS de intentarlo.</div>
+        </div>
+      </div>
+      <div class="yt-card" data-tags="free yt">
+        <div class="yt-icon">▶</div>
+        <div>
+          <div class="yt-name"><a href="https://youtube.com/@NetworkChuck" target="_blank">NetworkChuck</a></div>
+          <div class="yt-desc">Redes, hacking, Linux, certificaciones. Muy dinámico y entretenido. Excelente para Fase 0–1.</div>
+        </div>
+      </div>
+      <div class="yt-card" data-tags="free yt">
+        <div class="yt-icon">▶</div>
+        <div>
+          <div class="yt-name"><a href="https://youtube.com/@davidbombal" target="_blank">David Bombal</a></div>
+          <div class="yt-desc">Redes, Python para hacking, certificaciones Cisco/CompTIA. Entrevistas con expertos del sector.</div>
+        </div>
+      </div>
+      <div class="yt-card" data-tags="free yt">
+        <div class="yt-icon">▶</div>
+        <div>
+          <div class="yt-name"><a href="https://youtube.com/@NTFAQGuy" target="_blank">John Savill (Azure)</a></div>
+          <div class="yt-desc">El mejor canal de Azure. Master class completa, preparación AZ-500, SC-200. Esencial para Fase 4.</div>
+        </div>
+      </div>
+      <div class="yt-card" data-tags="free yt">
+        <div class="yt-icon">▶</div>
+        <div>
+          <div class="yt-name"><a href="https://youtube.com/@LiveOverflow" target="_blank">LiveOverflow</a></div>
+          <div class="yt-desc">Explicaciones técnicas profundas: CTF, exploit dev, binarios. Para cuando quieras ir más allá de la superficie.</div>
+        </div>
+      </div>
+      <div class="yt-card" data-tags="free yt">
+        <div class="yt-icon">▶</div>
+        <div>
+          <div class="yt-name"><a href="https://youtube.com/@HackerSploit" target="_blank">HackerSploit</a></div>
+          <div class="yt-desc">Tutoriales de herramientas: Metasploit, Nmap, Burp Suite, Kali Linux. Muy bien estructurado para principiantes.</div>
+        </div>
+      </div>
+      <div class="yt-card" data-tags="free yt">
+        <div class="yt-icon">▶</div>
+        <div>
+          <div class="yt-name"><a href="https://youtube.com/@STOKfredrik" target="_blank">STÖK (Bug Bounty)</a></div>
+          <div class="yt-desc">Bug bounty metodología, web hacking, mindset de hacker. Para Fase 5 cuando empieces con bug bounty.</div>
+        </div>
+      </div>
+      <div class="yt-card" data-tags="free yt">
+        <div class="yt-icon">▶</div>
+        <div>
+          <div class="yt-name"><a href="https://youtube.com/@SimplyCyber" target="_blank">Simply Cyber</a></div>
+          <div class="yt-desc">Carrera en ciberseguridad, GRC, Blue Team. El mejor para orientación profesional y entender el mercado laboral.</div>
+        </div>
+      </div>
+      <div class="yt-card" data-tags="free yt">
+        <div class="yt-icon">▶</div>
+        <div>
+          <div class="yt-name"><a href="https://youtube.com/@professormesser" target="_blank">Professor Messer</a></div>
+          <div class="yt-desc">Preparación de certificaciones CompTIA: Security+, Network+, A+. Videos completos 100% gratis en YouTube.</div>
+        </div>
+      </div>
+      <div class="yt-card" data-tags="free yt">
+        <div class="yt-icon">▶</div>
+        <div>
+          <div class="yt-name"><a href="https://youtube.com/@NahamSec" target="_blank">NahamSec (Bug Bounty)</a></div>
+          <div class="yt-desc">Live hacking en bug bounty, web security. Streams educativos donde ves reconocimiento y explotación en tiempo real.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── LIBROS ── -->
+  <div class="res-section">
+    <div class="res-section-title">📚 Libros recomendados</div>
+    <div class="book-list">
+      <div class="book-item" data-tags="free ref">
+        <div class="book-icon">📗</div>
+        <div>
+          <div class="book-title">The Linux Command Line — William Shotts <span style="color:var(--green);font-size:11px;font-weight:700">GRATIS online</span></div>
+          <div class="book-meta">Fase 0–1 · La biblia del CLI Linux. Disponible gratis: <a href="https://linuxcommand.org/tlcl.php" target="_blank">linuxcommand.org/tlcl.php</a></div>
+        </div>
+      </div>
+      <div class="book-item" data-tags="paid ref">
+        <div class="book-icon">📕</div>
+        <div>
+          <div class="book-title">Penetration Testing — Georgia Weidman <span style="color:var(--amber);font-size:11px;font-weight:700">~$35 USD</span></div>
+          <div class="book-meta">Fase 3 · El libro de pentesting más recomendado para principiantes. Cubre metodología, Metasploit, shellcode, AD, mobile. <a href="https://nostarch.com/pentesting" target="_blank">nostarch.com/pentesting</a></div>
+        </div>
+      </div>
+      <div class="book-item" data-tags="paid ref">
+        <div class="book-icon">📙</div>
+        <div>
+          <div class="book-title">The Hacker Playbook 3 — Peter Kim <span style="color:var(--amber);font-size:11px;font-weight:700">~$30 USD</span></div>
+          <div class="book-meta">Fase 3–4 · Técnicas avanzadas de Red Team: AD attacks, evasión, C2. Muy práctico y actualizado. <a href="https://www.amazon.com/Hacker-Playbook-Practical-Penetration-Testing/dp/1980901759" target="_blank">Amazon</a></div>
+        </div>
+      </div>
+      <div class="book-item" data-tags="paid ref">
+        <div class="book-icon">📘</div>
+        <div>
+          <div class="book-title">Web Application Hacker's Handbook — Stuttard & Pinto <span style="color:var(--amber);font-size:11px;font-weight:700">~$40 USD / PDF gratis (buscar)</span></div>
+          <div class="book-meta">Fase 3 · La referencia definitiva de web hacking. Aunque es del 2011, los conceptos de SQLi, XSS, auth bypass siguen siendo 100% válidos. <a href="https://www.wiley.com/en-us/The+Web+Application+Hacker%27s+Handbook-p-9781118026472" target="_blank">Wiley</a></div>
+        </div>
+      </div>
+      <div class="book-item" data-tags="free ref">
+        <div class="book-icon">📓</div>
+        <div>
+          <div class="book-title">OWASP Testing Guide v4.2 <span style="color:var(--green);font-size:11px;font-weight:700">GRATIS</span></div>
+          <div class="book-meta">Fase 3 · Guía oficial de testing de aplicaciones web de OWASP. 500+ páginas de metodología y técnicas. <a href="https://owasp.org/www-project-web-security-testing-guide/" target="_blank">owasp.org/testing-guide</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── COMUNIDADES ── -->
+  <div class="res-section">
+    <div class="res-section-title">👥 Comunidades & networking</div>
+    <div class="community-grid">
+      <div class="com-card" data-tags="free">
+        <div class="com-icon">💬</div>
+        <div class="com-name"><a href="https://discord.com/invite/tryhackme" target="_blank">TryHackMe Discord</a></div>
+        <div class="com-desc">+250k miembros. Ayuda, writeups, job postings. La comunidad más grande de principiantes en ciberseguridad.</div>
+      </div>
+      <div class="com-card" data-tags="free">
+        <div class="com-icon">💬</div>
+        <div class="com-name"><a href="https://discord.com/invite/hackthebox" target="_blank">Hack The Box Discord</a></div>
+        <div class="com-desc">Comunidad más técnica. Pistas para máquinas, threat intel, job board. Para Fase 3 en adelante.</div>
+      </div>
+      <div class="com-card" data-tags="free">
+        <div class="com-icon">💬</div>
+        <div class="com-name"><a href="https://discord.com/invite/tcm" target="_blank">TCM Security Discord</a></div>
+        <div class="com-desc">Comunidad de Heath Adams. Muy activo y amigable. Mucha gente en transición de carrera a ciberseguridad.</div>
+      </div>
+      <div class="com-card" data-tags="free">
+        <div class="com-icon">🔴</div>
+        <div class="com-name"><a href="https://reddit.com/r/netsec" target="_blank">r/netsec</a></div>
+        <div class="com-desc">Noticias técnicas de seguridad. Research, CVEs, técnicas avanzadas. Para mantenerse actualizado.</div>
+      </div>
+      <div class="com-card" data-tags="free">
+        <div class="com-icon">🔴</div>
+        <div class="com-name"><a href="https://reddit.com/r/cybersecurity" target="_blank">r/cybersecurity</a></div>
+        <div class="com-desc">Más general. Noticias, consejos de carrera, preguntas. Bueno para orientación cuando empiezas.</div>
+      </div>
+      <div class="com-card" data-tags="free">
+        <div class="com-icon">🔴</div>
+        <div class="com-name"><a href="https://reddit.com/r/AskNetsec" target="_blank">r/AskNetsec</a></div>
+        <div class="com-desc">Para preguntas técnicas de seguridad. La comunidad responde bien. Busca antes de preguntar.</div>
+      </div>
+      <div class="com-card" data-tags="free">
+        <div class="com-icon">🌐</div>
+        <div class="com-name"><a href="https://owasp.org/chapters/" target="_blank">OWASP Chapters locales</a></div>
+        <div class="com-desc">Meetups presenciales de OWASP en tu ciudad. Networking real con profesionales. Muy valioso para primer empleo.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MISC TOOLS ── -->
+  <div class="res-section">
+    <div class="res-section-title">🛠 Herramientas online esenciales (siempre abiertas)</div>
+    <div class="res-grid">
+      <div class="res-card" data-tags="free tool">
+        <div class="res-card-header">
+          <div class="res-card-title">Shodan — Buscador de dispositivos</div>
+          <div class="res-badges"><span class="badge-free">Gratis + Pro</span></div>
+        </div>
+        <div class="res-card-desc">Motor de búsqueda para dispositivos conectados a internet. Útil para OSINT, verificar exposición de servicios, encontrar configuraciones vulnerables. Plan básico gratis con registro.</div>
+        <a class="res-link" href="https://shodan.io/" target="_blank">→ shodan.io</a>
+      </div>
+      <div class="res-card" data-tags="free tool">
+        <div class="res-card-header">
+          <div class="res-card-title">CyberChef — Swiss army knife digital</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span></div>
+        </div>
+        <div class="res-card-desc">Herramienta web para operaciones de datos: encoding/decoding (base64, hex, URL), cifrado, hashing, análisis forense. Imprescindible en CTFs y análisis de malware. Funciona offline también.</div>
+        <a class="res-link" href="https://gchq.github.io/CyberChef/" target="_blank">→ gchq.github.io/CyberChef</a>
+      </div>
+      <div class="res-card" data-tags="free tool">
+        <div class="res-card-header">
+          <div class="res-card-title">MXToolbox — Diagnóstico email/DNS</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span></div>
+        </div>
+        <div class="res-card-desc">Suite de herramientas DNS, email y red: lookup MX, SPF/DKIM/DMARC verification, blacklist check, header analysis de emails. Esencial para análisis de phishing y reconocimiento.</div>
+        <a class="res-link" href="https://mxtoolbox.com/" target="_blank">→ mxtoolbox.com</a>
+      </div>
+      <div class="res-card" data-tags="free tool">
+        <div class="res-card-header">
+          <div class="res-card-title">CVSS Calculator (NVD)</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span></div>
+        </div>
+        <div class="res-card-desc">Calculadora oficial de CVSS v3.1 del NIST. Úsala para asignar scores a vulnerabilidades en tus reportes de pentest. También busca CVEs con sus scores en el NVD (National Vulnerability Database).</div>
+        <a class="res-link" href="https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator" target="_blank">→ nvd.nist.gov/cvss-calculator</a>
+      </div>
+      <div class="res-card" data-tags="free tool">
+        <div class="res-card-header">
+          <div class="res-card-title">Have I Been Pwned</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span></div>
+        </div>
+        <div class="res-card-desc">Verifica si emails o contraseñas aparecen en brechas de datos conocidas. API gratuita para integrar en scripts Python. Útil para demostrar riesgo en reportes y para reconocimiento OSINT.</div>
+        <a class="res-link" href="https://haveibeenpwned.com/" target="_blank">→ haveibeenpwned.com</a>
+      </div>
+      <div class="res-card" data-tags="free tool">
+        <div class="res-card-header">
+          <div class="res-card-title">Obsidian — Notas técnicas</div>
+          <div class="res-badges"><span class="badge-free">GRATIS</span></div>
+        </div>
+        <div class="res-card-desc">La mejor herramienta para tomar notas técnicas. Markdown local, graph view, templates, plugins para CTF notes. Muchos profesionales de ciberseguridad documentan todo su conocimiento aquí.</div>
+        <a class="res-link" href="https://obsidian.md/" target="_blank">→ obsidian.md</a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-recursos -->
+
+<script>
+function showTab(id){
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function filterRes(tag, btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  const cards = document.querySelectorAll('#tab-recursos [data-tags]');
+  cards.forEach(c=>{
+    if(tag==='all') c.style.display='';
+    else c.style.display = c.dataset.tags&&c.dataset.tags.includes(tag) ? '' : 'none';
+  });
+  // hide/show empty section headers
+  document.querySelectorAll('#tab-recursos .res-cat-header').forEach(h=>{
+    let sib = h.nextElementSibling;
+    let hasVisible = false;
+    while(sib && !sib.classList.contains('res-cat-header') && !sib.classList.contains('res-section-title')){
+      if(sib.dataset.tags && sib.style.display!=='none') hasVisible=true;
+      const children = sib.querySelectorAll('[data-tags]');
+      children.forEach(c=>{ if(c.style.display!=='none') hasVisible=true; });
+      sib=sib.nextElementSibling;
+    }
+    h.style.display = hasVisible ? '' : 'none';
+  });
+}
+</script>
+</body>
+</html>
